@@ -11,52 +11,34 @@
     <div class="mid row j-b a-c">
       <div class="item col a-c">
         <div class="title">我的排名</div>
-        <div class="des">7</div>
+        <div class="des">{{self.rank}}</div>
       </div>
       <div class="item col a-c">
-        <img class="titleImg" src="./title.png" alt="">
-        <div class="title2">林小小</div>
+        <img class="titleImg" :src="self.imgurl" alt="">
+        <div class="title2">{{self.orgname}}</div>
       </div>
       <div class="item col a-c">
         <div class="title">积分</div>
-        <div class="des">3580</div>
+        <div class="des">{{self.integral}}</div>
       </div>
     </div>
     <div class="content">
-      <div class="tab row a-c j-a van-hairline--bottom">
+      <div class="tab row a-c  van-hairline--bottom">
         <div class="tabItem row a-c" v-for="(item,index) in title" :class="{'active':isActive==index}" :key="index" @click="tab(index)">{{item}}</div>
       </div>
-      <div class="item row a-c j-b van-hairline--bottom">
+
+      <div class="item row a-c j-b van-hairline--bottom" v-for="(item,index) in list" :key="index">
         <div class="left row a-c">
-          <div class="title row a-c j-c">1</div>
-          <img class="headImg" src="./title.png" alt="">
-          <div class="tip">CENTER</div>
+          <img class="titleImg" v-if="index == 0" src="./champion.png" alt="">
+          <img class="titleImg" v-else-if="index == 1" src="./runner.png" alt="">
+          <img class="titleImg" v-else-if="index == 2" src="./June.png" alt="">
+          <div class="title row a-c j-c" v-else>1</div>
+          <div>
+            <img class="headImg" :src="item.imgurl" alt="">
+          </div>
+          <div class="tip">{{item.orgname}}</div>
         </div>
-        <div class="btn row a-c j-c">399</div>
-      </div>
-      <div class="item row a-c j-b van-hairline--bottom">
-        <div class="left row a-c">
-          <img class="titleImg" src="./champion.png" alt="">
-          <img class="headImg" src="./title.png" alt="">
-          <div class="tip">CENTER</div>
-        </div>
-        <div class="btn row a-c j-c">399</div>
-      </div>
-      <div class="item row a-c j-b van-hairline--bottom">
-        <div class="left row a-c">
-          <img class="titleImg" src="./runner.png" alt="">
-          <img class="headImg" src="./title.png" alt="">
-          <div class="tip">CENTER</div>
-        </div>
-        <div class="btn row a-c j-c">+399</div>
-      </div>
-      <div class="item row a-c j-b van-hairline--bottom">
-        <div class="left row a-c">
-          <img class="titleImg" src="./June.png" alt="">
-          <img class="headImg" src="./title.png" alt="">
-          <div class="tip">CENTER</div>
-        </div>
-        <div class="btn row a-c j-c">399</div>
+        <div class="btn row a-c j-c">{{item.integral}}积分</div>
       </div>
 
       <noMessage :noinfoShow="noinfoShow" />
@@ -67,21 +49,32 @@
 </template>
 <script type="text/ecmascript-6">
 import noMessage from 'components/noMessage/noMessage'
+import { IntegralRank } from 'api/index'
 export default {
   data() {
     return {
-      title: ['总积分排行', '使用积分排名'],
+      title: ['总积分排行'],
       isActive: 0,
-      noinfoShow: false
+      noinfoShow: false,
+      list: [],
+      self: ""
 
     }
   },
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
-
+    this._IntegralRank()
 
   },
   methods: {
+    _IntegralRank() {
+      IntegralRank().then(res => {
+        console.log('积分排行', res)
+        this.list = res.data.list
+        this.self = res.data.self
+      })
+    },
+
     tab(flag) {
       this.isActive = flag
     },
@@ -171,7 +164,6 @@ export default {
   .item
     margin 0 38px 0 56px
     height 155px
-
     .left
       width 400px
       .title
@@ -186,6 +178,7 @@ export default {
         height 75px
         border-radius 50%
         margin-right 10px
+        display block
       .titleImg
         width 52px
         height 61px
@@ -197,6 +190,11 @@ export default {
         font-size 27px
         color #d5d5d5
         margin-top 5px
+        overflow hidden
+        display -webkit-box
+        -webkit-box-orient vertical
+        -webkit-line-clamp 1
+        text-overflow ellipsis
     .btn
       margin-right 50px
       color #b9a484

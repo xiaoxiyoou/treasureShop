@@ -1,5 +1,5 @@
 module.exports = {
     globals: {
-        'WeixinJSBridge': false
+        'WeixinJSBridge': false,
     }
 }

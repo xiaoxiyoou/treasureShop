@@ -3,7 +3,7 @@
     <img class="banner" src="./banner.png" alt="">
     <div class="top col a-c j-c">
       <div class="intergralCon row a-c">
-        <div class="intergral">2855</div>
+        <div class="intergral">{{capi.integral}}</div>
         <div class="">积分</div>
       </div>
       <div class="btn row a-c j-c" @click="record">积分纪录</div>
@@ -19,7 +19,8 @@
             并登录诚商入口</div>
           <div class="tip">在诚商联盟公众号内完成在每日签到</div>
         </div>
-        <div class="btn row a-c j-c">领取</div>
+        <div class="btn row a-c j-c" v-if="loginsign" @click="_loginsign">领取</div>
+        <div class="btn row a-c j-c" v-else>已领取</div>
       </div>
       <div class="item row a-c j-b van-hairline--bottom">
         <div class="left col">
@@ -30,7 +31,8 @@
           <div class="des">每日签到</div>
           <div class="tip">在诚商联盟公众号内完成在每日签到</div>
         </div>
-        <div class="btn row a-c j-c">签到</div>
+        <div class="btn row a-c j-c" v-if="sign" @click="_sign">签到</div>
+        <div class="btn row a-c j-c" v-else>已签到</div>
       </div>
       <div class="item row a-c j-b van-hairline--bottom">
         <div class="left col">
@@ -58,21 +60,56 @@
 </template>
 <script type="text/ecmascript-6">
 import { Toast } from 'vant'
+import { Integral, sign, loginsign } from 'api/index'
 export default {
   data() {
     return {
       show: false,
-      num: ''
-
+      num: '',
+      loginsign: '',
+      sign: '',
+      capi: ''
 
     }
   },
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
+    this._Integral()
 
 
   },
   methods: {
+    _Integral() {
+      Integral().then(res => {
+        console.log('获取积分状态', res)
+        this.capi = res.data.capi
+        this.loginsign = res.data.loginsign
+        this.sign = res.data.sign
+
+      })
+    },
+    _sign() {
+      sign().then(res => {
+        console.log('签到', res)
+        if (res.code == 0) {
+          Toast('签到成功')
+          this._Integral()
+        } else {
+          Toast(res.msg)
+        }
+      })
+    },
+    _loginsign() {
+      loginsign().then(res => {
+        console.log('领取', res)
+        if (res.code == 0) {
+          Toast('领取成功')
+          this._Integral()
+        } else {
+          Toast(res.msg)
+        }
+      })
+    },
     record() {
       this.$router.push({
         path: '/IntegralRecord',

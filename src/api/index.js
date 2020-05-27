@@ -15,7 +15,21 @@ export const articleapi = (params) => ajax(SHOP_URL + 'api/article/getlist', par
 export const articleapiDetail = (params) => ajax(SHOP_URL + 'api/article/detail', params)
 // 城商申请
 export const unionApply = (params) => ajax(SHOP_URL + 'api/union/apply', params, 'POST')
-
+// 视频列表
+export const getVideoList = (params) => ajax(SHOP_URL + 'api/video/getlist', params)
+// 视频详情
+export const getVideoDetail = (params) => ajax(SHOP_URL + 'api/video/getdetail', params)
+// 积分相关
+// 积分收支
+export const GetIntegral = (params) => ajax(SHOP_URL + 'api/union/GetIntegral', params)
+// 积分签到
+export const sign = (params) => ajax(SHOP_URL + 'api/union/sign', params)
+// 关注公众号奖励
+export const loginsign = (params) => ajax(SHOP_URL + 'api/union/loginsign', params)
+// 获取积分状态
+export const Integral = (params) => ajax(SHOP_URL + 'api/union/Integral', params)
+// 积分排行
+export const IntegralRank = (params) => ajax(SHOP_URL + 'api/union/IntegralRank', params)
 
 // 登录
 export const getOpenId = (params) => ajax(URL + '/Action/UserLogin', params)

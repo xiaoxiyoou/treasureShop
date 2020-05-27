@@ -28,7 +28,6 @@ const routes = [{
     component: () => import('pages/policy/policy'),
     meta: {
       title: '诚商政策',
-      // requireAuth: true,
       depth: 1
     },
 
@@ -43,24 +42,13 @@ const routes = [{
     },
 
   },
-  // {
-  //   path: '/unionShop',
-  //   name: 'unionShop',
-  //   component: () => import('pages/unionShop/unionShop'),
-  //   meta: {
-  //     title: '家族宝诚商',
-  //     requireAuth: true,
-  //     depth: 1
-  //   },
 
-  // },
   {
     path: '/apply',
     name: 'apply',
     component: () => import('pages/apply/apply'),
     meta: {
       title: '诚商申请',
-      // requireAuth: true,
       depth: 1
     },
 
@@ -71,29 +59,17 @@ const routes = [{
     component: () => import('pages/alliancePolicy/alliancePolicy'),
     meta: {
       title: '家族宝诚信联盟商家政策',
-      // requireAuth: true,
       depth: 1
     },
 
   },
-  // {
-  //   path: '/alliancePolicy',
-  //   name: 'alliancePolicy',
-  //   component: () => import('pages/alliancePolicy/alliancePolicy'),
-  //   meta: {
-  //     title: '家族宝诚信联盟商家政策',
-  //     requireAuth: true,
-  //     depth: 1
-  //   },
 
-  // },
   {
     path: '/add',
     name: 'add',
     component: () => import('pages/add/add'),
     meta: {
       title: '家族宝诚信联盟商家补充政策',
-      // requireAuth: true,
       depth: 1
     },
 
@@ -157,6 +133,28 @@ const routes = [{
     component: () => import('pages/memorial/memorial'),
     meta: {
       title: '专属讣告',
+      requireAuth: true,
+      depth: 1
+    },
+
+  },
+  {
+    path: '/VideoList',
+    name: 'VideoList',
+    component: () => import('pages/VideoList/VideoList'),
+    meta: {
+      title: '视频列表',
+      requireAuth: true,
+      depth: 1
+    },
+
+  },
+  {
+    path: '/VideoDetail',
+    name: 'VideoDetail',
+    component: () => import('pages/VideoDetail/VideoDetail'),
+    meta: {
+      title: '视频详情',
       requireAuth: true,
       depth: 1
     },

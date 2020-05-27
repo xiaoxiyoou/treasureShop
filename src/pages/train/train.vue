@@ -18,15 +18,15 @@ s<template>
       <div class="center  row a-c j-c" @click="integral">获得积分</div>
     </div>
     <div class="item-wrapper row f-w j-c a-c">
-      <div class="item col j-c a-c border-right" @click="intro()">
+      <div class="item col j-c a-c border-right" @click="VideoList(18)">
         <img src="./course.png" alt="" />
         <div>免费课程</div>
       </div>
-      <div class="item col j-c a-c  border-right" @click="yiJing()">
+      <div class="item col j-c a-c  border-right" @click="VideoList(19)">
         <img src="./integralcourse.png" alt="" />
         <div>积分课程</div>
       </div>
-      <div class="item col j-c a-c " @click="brand()">
+      <div class="item col j-c a-c " @click="VideoList(20)">
         <img src="./pay.png" alt="" />
         <div>付费课程</div>
       </div>
@@ -94,12 +94,21 @@ export default {
       })
 
     },
-    broadcast(){
-      window.location.href="https://appt2ipqewv9303.h5.xiaoeknow.com/mp_more/eyJpZCI6IjI1MDU3MDgiLCJjaGFubmVsX2lkIjoiIiwiY29tcG9uZW50X2lkIjoiIn0?entry=2&entry_type=2001"
+    broadcast() {
+      window.location.href = "https://appt2ipqewv9303.h5.xiaoeknow.com/mp_more/eyJpZCI6IjI1MDU3MDgiLCJjaGFubmVsX2lkIjoiIiwiY29tcG9uZW50X2lkIjoiIn0?entry=2&entry_type=2001"
 
     },
     yiJing() {
       this.$router.push({ path: '/yiJing' })
+    },
+    VideoList(cate) {
+      this.$router.push({
+        path: '/VideoList',
+        query: {
+          cate: cate,
+        }
+
+      })
     },
     memorial() {
       this.$router.push({ path: '/memorial' })

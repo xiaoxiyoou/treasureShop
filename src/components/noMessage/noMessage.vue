@@ -20,6 +20,6 @@ export default {
 }
 .noinfoCon {
   color: #8a898a;
-  position: absolute;
+  /* position: absolute; */
 }
 </style>

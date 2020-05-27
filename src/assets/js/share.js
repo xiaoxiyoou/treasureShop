@@ -5,11 +5,12 @@ var wx = require('weixin-js-sdk')
 export default function wxShare({
   desc
 } = {}) {
-  let link = 'http://union.app.jzb768.com/#' + localStorage.getItem('fromUrl')
+  let link = 'http://union.app.jzb768.com/#' + localStorage.getItem('fromUrlTwo')
   axios.get('http://passport.fuyulove.com/action/jssdk', {
       params: {
         sid: 658,
         url: location.href.split('#')[0],
+        t: Math.random()
       }
     })
     .then(res => {
@@ -46,14 +47,14 @@ export default function wxShare({
         title: document.title,
         link: link,
         desc: desc,
-        imgUrl: 'http://b.fuyulove.com/wisdom/img/share.jpg',
+        imgUrl: 'http://wx.app.jzb768.com/picture/share.jpg',
       })
     })
     wx.onMenuShareTimeline({
       title: document.title,
       link: link,
       desc: desc,
-      imgUrl: 'http://b.fuyulove.com/wisdom/img/share.jpg',
+      imgUrl: 'http://wx.app.jzb768.com/picture/share.jpg',
     })
     wx.error(function () {})
   }

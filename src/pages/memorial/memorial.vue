@@ -67,9 +67,7 @@ export default {
     make() {
       window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=xRJdXN5KgJgmtJCBI97Xig=='
     },
-    // nomake(){
-    //   Toast('成为商家可免费制作讣告')
-    // }
+
 
 
   },

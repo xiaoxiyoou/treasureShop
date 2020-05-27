@@ -21,6 +21,10 @@ import LyTab from 'ly-tab'
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 Vue.use(LyTab)
+// import VideoPlayer from 'vue-video-player'
+// import 'video.js/dist/video-js.css'
+// require('vue-video-player/src/custom-theme.css')
+// Vue.use(VideoPlayer)
 Vue.prototype.$moment = 'moment'
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {

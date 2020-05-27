@@ -35,7 +35,14 @@ module.exports = {
             assetFilter: function (assetFilename) {
                 return assetFilename.endsWith('.js');
             }
-        }
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+              $: "jquery",
+              jQuery: "jquery",
+              "windows.jQuery": "jquery"
+            })
+          ],
     },
     devServer: {
         open: true, // 是否自动弹出浏览器页面
