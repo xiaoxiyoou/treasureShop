@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="container" v-wechat-title="title">
     <div class="">
       <video class="video-player" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-orientation="h5" x5-video-player-fullscreen="true" x5-playsinline preload="auto" controlslist="nodownload" controls="false" ref="video" :src="videos[0].videopath" :poster="VideoObj.videoimg">
@@ -56,6 +56,8 @@ export default {
 
   },
   mounted() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0
+    window.WeixinJSBridge.call('hideOptionMenu');
 
 
   },

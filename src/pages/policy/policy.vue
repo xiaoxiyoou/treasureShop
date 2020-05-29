@@ -1,5 +1,5 @@
 <template>
-  <div class="container col j-b">
+  <div class="container col">
     <div class="bannerWrapper">
       <img class="banner" src="./banner.png" alt="" />
       <!-- <div class="avertwraper row a-c " @click="personalCenter">
@@ -50,6 +50,7 @@ export default {
   },
   mounted() {
     // this._selfDetail()
+    window.WeixinJSBridge.call('hideOptionMenu');
 
   },
   methods: {
@@ -120,7 +121,7 @@ export default {
     position relative
     .banner
       width 100%
-      height 590px
+      height 420px
       vertical-align bottom
     .avertwraper
       position absolute

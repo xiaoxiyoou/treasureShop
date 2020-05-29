@@ -21,7 +21,7 @@
           <div class="des">已有<span style="color:#b2a189">22923</span>人制作</div>
         </div>
         <div class="right row ">
-          <div class="pre row a-c j-c" @click="pre">预览体验</div>
+          <div class="pre row a-c j-c" @click="pre2">预览体验</div>
           <div class="make row a-c j-c" @click="make">立即制作</div>
         </div>
       </div>
@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
+    window.WeixinJSBridge.call('hideOptionMenu');
 
 
   },
@@ -64,8 +65,11 @@ export default {
     pre() {
       window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=xRJdXN5KgJgmtJCBI97Xig=='
     },
+    pre2() {
+      window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=8XIG1EMzxiDXykWrCIp_DQ=='
+    },
     make() {
-      window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=xRJdXN5KgJgmtJCBI97Xig=='
+      window.location.href = 'http://b.fuyulove.com/3g/login.aspx'
     },
 
 

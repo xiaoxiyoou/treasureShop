@@ -63,6 +63,7 @@ export default {
   },
   mounted() {
     this._getinfo()
+    window.WeixinJSBridge.call('hideOptionMenu');
 
   },
   methods: {

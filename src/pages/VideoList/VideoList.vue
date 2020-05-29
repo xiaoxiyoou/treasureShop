@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <ul class="videoList" ref="videoList">
-
       <li @click="handleList(item.videoid)" class="item row border-bottom-1px j-c a-c" v-for="(item, index) in videoList" :key="index">
         <img class="itemImg" :src="item.videoconver" alt="">
         <div class="itemInfo col j-b">
@@ -17,7 +16,6 @@
           </div>
         </div>
       </li>
-
     </ul>
     <noMessage :noinfoShow="noinfoShow" />
   </div>
@@ -29,7 +27,7 @@ import BScroll from 'better-scroll'
 export default {
   data() {
     return {
-      noinfoShow:false,
+      noinfoShow: false,
       videoList: [],
       pageIndex: 1,
       pageSize: 10
@@ -42,6 +40,10 @@ export default {
 
   },
   mounted() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0
+    // 通过下面这个API隐藏右上角按钮
+    window.WeixinJSBridge.call('hideOptionMenu');
+  
     // 超出滚动
     this.$nextTick(() => {
       this.scroll = new BScroll('.container', { click: true })
@@ -52,7 +54,7 @@ export default {
       getVideoList({
         // pageIndex: this.pageIndex,
         // pageSize: this.pageSize,
-        cate:  this.$route.query.cate
+        cate: this.$route.query.cate
       }).then(res => {
         console.log('课程列表', res)
         if (res.code === 0) {

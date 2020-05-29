@@ -33,6 +33,7 @@ export default {
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
     this._GetIntegral(0)
+    window.WeixinJSBridge.call('hideOptionMenu');
 
   },
   methods: {

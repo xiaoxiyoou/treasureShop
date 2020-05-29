@@ -7,7 +7,7 @@ import 'assets/css/animate.css'
 import 'amfe-flexible'
 import store from './store/index'
 import axios from 'axios'
-import share from 'assets/js/share'
+// import wxShare from 'assets/js/share'
 import router from './router'
 import VueCookies from 'vue-cookies'
 Vue.config.productionTip = false
@@ -21,10 +21,7 @@ import LyTab from 'ly-tab'
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 Vue.use(LyTab)
-// import VideoPlayer from 'vue-video-player'
-// import 'video.js/dist/video-js.css'
-// require('vue-video-player/src/custom-theme.css')
-// Vue.use(VideoPlayer)
+
 Vue.prototype.$moment = 'moment'
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
@@ -35,11 +32,10 @@ router.beforeEach((to, from, next) => {
     if (!fromUrl) {
       localStorage.setItem('fromUrl', to.fullPath)
     }
-    if (localStorage.getItem('token') != "undefined" && localStorage.getItem('token')!=null ) {
-      // if (localStorage.getItem('userid')&& VueCookies.get('userid')  && localStorage.getItem('token')) {
+    // if (localStorage.getItem('token') != "undefined" && localStorage.getItem('token') != null) {
+    if (localStorage.getItem('token')) {
       next();
     } else {
-     
       next({
         path: '/LoginIn'
       })
@@ -49,7 +45,10 @@ router.beforeEach((to, from, next) => {
   }
 })
 router.afterEach(() => {
- share()
+ 
+
+
+
 })
 
 Vue.filter('moment', function (value, formatString) {

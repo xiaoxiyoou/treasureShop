@@ -41,9 +41,9 @@
             <div class="title">获得1:10积分</div>
           </div>
           <div class="des">完成家族宝进货换取积分</div>
-          <div class="tip">根据进货金额按10元货得1积分原则兑换积分</div>
+          <div class="tip" style="white-space:nowrap">根据进货金额按10元货得1积分原则兑换积分</div>
         </div>
-        <div class="btn row a-c j-c" @click="exchange">兑换</div>
+        <!-- <div class="btn row a-c j-c" @click="exchange">兑换</div> -->
       </div>
     </div>
     <van-popup v-model="show" class="pop " round>
@@ -75,6 +75,7 @@ export default {
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
     this._Integral()
+    window.WeixinJSBridge.call('hideOptionMenu');
 
 
   },

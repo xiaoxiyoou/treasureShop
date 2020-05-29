@@ -31,10 +31,15 @@ export default {
   },
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
-
+    document.addEventListener('WeixinJSBridgeReady', () => {
+      // 通过下面这个API隐藏右上角按钮
+      console.log("执行")
+      window.WeixinJSBridge.call('hideOptionMenu');
+    })
 
   },
   methods: {
+
     loginIn() {
       if (!this.username) {
         Toast('请输入用户名')

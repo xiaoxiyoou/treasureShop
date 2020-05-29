@@ -9,7 +9,7 @@
       <div class="btn row a-c j-c" @click="IntegralRecord">积分纪录</div>
     </div>
     <div class="mid row j-b a-c">
-      <div class="item col a-c">
+      <div class="item col a-c" style="width:25%">
         <div class="title">我的排名</div>
         <div class="des">{{self.rank}}</div>
       </div>
@@ -17,7 +17,7 @@
         <img class="titleImg" :src="self.imgurl" alt="">
         <div class="title2">{{self.orgname}}</div>
       </div>
-      <div class="item col a-c">
+      <div class="item col a-c" style="width:25%">
         <div class="title">积分</div>
         <div class="des">{{self.integral}}</div>
       </div>
@@ -64,6 +64,7 @@ export default {
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
     this._IntegralRank()
+    window.WeixinJSBridge.call('hideOptionMenu');
 
   },
   methods: {
@@ -127,12 +128,14 @@ export default {
     margin-top 162px
     padding 0 50px
     box-shadow 1px 1px 5px #eaeaea
+    white-space nowrap
     .item
       .titleImg
         width 184px
         height 184px
         border-radius 50%
         margin-top -70px
+        box-shadow 1px 1px 5px #eaeaee
       .title
         font-size 32px
         color #666666
@@ -145,6 +148,13 @@ export default {
         font-size 32px
         margin-bottom 30px
         margin-top 10px
+        overflow hidden
+        display -webkit-box
+        -webkit-box-orient vertical
+        -webkit-line-clamp 1
+        text-overflow ellipsis
+        width 300px
+        text-align center
 .content
   width 691px
   box-shadow 1px 1px 5px #eaeaea

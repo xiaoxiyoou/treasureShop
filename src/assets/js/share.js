@@ -5,6 +5,7 @@ var wx = require('weixin-js-sdk')
 export default function wxShare({
   desc
 } = {}) {
+
   let link = 'http://union.app.jzb768.com/#' + localStorage.getItem('fromUrlTwo')
   axios.get('http://passport.fuyulove.com/action/jssdk', {
       params: {
@@ -16,6 +17,7 @@ export default function wxShare({
     .then(res => {
       console.log('签名', res)
       config(res.data.data.data)
+  
     })
     .catch(function (error) {
       console.log(error);
@@ -27,22 +29,24 @@ export default function wxShare({
       timestamp: data.timestamp, // 必填，生成签名的时间戳
       nonceStr: data.nonceStr, // 必填，生成签名的随机串
       signature: data.signature, // 必填，签名，见附录1
-      jsApiList: [
-        'getLocation',
-        'onMenuShareAppMessage',
-        'onMenuShareTimeline',
-        'chooseImage',
-        'uploadImage',
-        'downloadImage',
-        'previewImage',
-        'startRecord',
-        'stopRecord',
-        'playVoice',
-        'uploadVoice',
-        'getLocalImgData'
-      ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+      // jsApiList: [
+      //   'getLocation',
+      //   'onMenuShareAppMessage',
+      //   'onMenuShareTimeline',
+      //   'chooseImage',
+      //   'uploadImage',
+      //   'downloadImage',
+      //   'previewImage',
+      //   'startRecord',
+      //   'stopRecord',
+      //   'playVoice',
+      //   'uploadVoice',
+      //   'getLocalImgData'
+      // ] 
     })
     wx.ready(() => {
+
+      wx.hideAllNonBaseMenuItem();
       wx.onMenuShareAppMessage({
         title: document.title,
         link: link,

@@ -1,34 +1,37 @@
 <template>
   <div class="container col a-c">
     <img class="bannerPic" src="./banner.png" alt="">
-    <img class="title" src="./pic1.png" alt="">
-    <div class="bannerCon">
-      <swiper :options="swiperOption" class="banner col a-c">
-        <div class="swiper-slide" v-for="(image,index) in banner" :key="index"> <img class="swiper-picture" :src="image" alt="" />
+    <div class="titleCon">
+      <img class="title" src="./pic1.png" alt="">
+      <div class="bannerCon">
+        <swiper :options="swiperOption" class="banner col a-c">
+          <div class="swiper-slide" v-for="(image,index) in banner" :key="index"> <img class="swiper-picture" :src="image" alt="" />
+          </div>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+        <div class="swiper-button-next leftOne" slot="button-next"></div>
+        <div class="swiper-button-prev rightOne" slot="button-prev"></div>
+        <div class="shop">连云港永安堂殡葬服务公司</div>
+      </div>
+      <img class="pic" src="./pic2.png" alt="">
+      <div class="content col a-c">
+        <img class="top" src="./title.png" alt="" ref="pronbit">
+        <div class="item col a-c">
+          <input class="name com" type="text" placeholder="请输入您的姓名" v-model="name">
+          <input class="tel com" type="number" placeholder="请输入手机号码" v-model="mobie">
+          <input class="address com" placeholder="请选择您所在的城市" v-model="address" @click="areaShowList" readonly="readonly">
+          <div class="receive row a-c">
+            <img class="" src="./../../assets/img/noselect.png" v-if="select" @click="selectShow(false)">
+            <img class="" src="./../../assets/img/select1.png" v-if="!select" @click="selectShow(true)">
+            <div class="text" v-if="select">我已阅读并接受《服务须知》《隐私政策》</div>
+            <div class="text textHover" v-if="!select">我已阅读并接受《服务须知》《隐私政策》</div>
+          </div>
+          <div class="textbtn row j-c a-c" @click="_unionApply">立即申请</div>
+          <div class="tip">请填写您的联系方式以便为您安排专员服务。</div>
         </div>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-      <div class="swiper-button-next leftOne" slot="button-next"></div>
-      <div class="swiper-button-prev rightOne" slot="button-prev"></div>
-      <div class="shop">连云港永安堂殡葬服务公司</div>
-    </div>
-    <img class="pic" src="./pic2.png" alt="">
-    <div class="content col a-c">
-      <img class="top" src="./title.png" alt="" ref="pronbit">
-      <div class="item col a-c">
-        <input class="name com" type="text" placeholder="请输入您的姓名" v-model="name">
-        <input class="tel com" type="number" placeholder="请输入手机号码" v-model="mobie">
-        <input class="address com" placeholder="请选择您所在的城市" v-model="address" @click="areaShowList" readonly="readonly">
-        <div class="receive row a-c">
-          <img class="" src="./../../assets/img/noselect.png" v-if="select" @click="selectShow(false)">
-          <img class="" src="./../../assets/img/select1.png" v-if="!select" @click="selectShow(true)">
-          <div class="text" v-if="select">我已阅读并接受《服务须知》《隐私政策》</div>
-          <div class="text textHover" v-if="!select">我已阅读并接受《服务须知》《隐私政策》</div>
-        </div>
-        <div class="textbtn row j-c a-c" @click="_unionApply">立即申请</div>
-        <div class="tip">请填写您的联系方式以便为您安排专员服务。</div>
       </div>
     </div>
+
     <div class="btmFix row a-c j-c" v-if="showBtn"></div>
     <div class="btn row j-c a-c" v-if="showBtn" @click="scrollIntoView">立即申请</div>
     <!-- 城市选择 -->
@@ -76,6 +79,7 @@ export default {
   },
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
+    window.WeixinJSBridge.call('hideOptionMenu');
     // 防止被弹起
     window.onresize = () => {
       if (this.clientHeight > document.documentElement.clientHeight) {
@@ -163,9 +167,14 @@ export default {
   .bannerPic
     width 689px
     margin-top 326px
-  .title
+  .titleCon
+    background-color #9c9082
     width 650px
-    height 1194px
+    text-align center
+    .title
+      width 600px
+      vartical-align bottom
+      margin-top 55px
   .pic
     width 650px
     display block
@@ -176,12 +185,11 @@ export default {
     text-align center
     position relative
     .banner
-      width 569px
+      width 600px
       position relative
-      left 2.3px
       text-align center
       background-color #7c7161
-      padding 30px 0 50px
+      padding 25px 0 50px
       img
         width 396px
         height 593px
