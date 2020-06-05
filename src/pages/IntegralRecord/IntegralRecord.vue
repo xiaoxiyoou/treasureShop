@@ -4,7 +4,7 @@
       <div class="tab row a-c j-a van-hairline--bottom">
         <div class="tabItem row a-c" v-for="(item,index) in title" :class="{'active':isActive==index}" :key="index" @click="tab(index)">{{item}}</div>
       </div>
-      <noMessage style="margin:30px auto 50px" :noinfoShow="noinfoShow" />
+      <noMessage style="margin:70px auto 90px" :noinfoShow="noinfoShow" />
       <div class="item row a-c j-b van-hairline--bottom" v-for="(item,index) in list" :key="index">
         <div class="left col">
           <div class="title">{{item.remark}}</div>
@@ -76,9 +76,10 @@ export default {
   height 100%
   bottom 0
   .content
-    width 691px
-    box-shadow 1px 1px 5px #eaeaea
-    border-radius 20px
+    width 703px
+    // box-shadow 1px 1px 5px #eaeaea
+    // border-radius 20px
+    border 2px solid #000000
     background-color #ffffff
     margin-top 38px
     .tab
@@ -100,7 +101,7 @@ export default {
       .left
         width 400px
         .title
-          color #b9a484
+          color #000000
           font-weight 700
           font-size 30px
         .des

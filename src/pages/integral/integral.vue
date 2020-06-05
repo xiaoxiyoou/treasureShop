@@ -1,6 +1,6 @@
 <template>
   <div class="container col a-c">
-    <img class="banner" src="./banner.png" alt="">
+    <!-- <img class="banner" src="./banner.png" alt=""> -->
     <div class="top col a-c j-c">
       <div class="intergralCon row a-c">
         <div class="intergral">{{capi.integral}}</div>
@@ -22,7 +22,7 @@
         <div class="btn row a-c j-c" v-if="loginsign" @click="_loginsign">领取</div>
         <div class="btn row a-c j-c" v-else>已领取</div>
       </div>
-      <div class="item row a-c j-b van-hairline--bottom">
+      <!-- <div class="item row a-c j-b van-hairline--bottom">
         <div class="left col">
           <div class="row a-c">
             <img class="icon" src="./icon.png" alt="">
@@ -43,10 +43,9 @@
           <div class="des">完成家族宝进货换取积分</div>
           <div class="tip" style="white-space:nowrap">根据进货金额按10元货得1积分原则兑换积分</div>
         </div>
-        <!-- <div class="btn row a-c j-c" @click="exchange">兑换</div> -->
-      </div>
-    </div>
-    <van-popup v-model="show" class="pop " round>
+      </div>-->
+    </div> 
+    <!-- <van-popup v-model="show" class="pop " round>
       <div class="wrapper col a-c">
         <div class="title">兑换积分</div>
         <div class="des">必须为10的倍数进行兑换</div>
@@ -54,7 +53,7 @@
         <div class="get">可获得积分：{{num / 10}}</div>
         <div class="btn row a-c j-c" @click="confirm">立即兑换</div>
       </div>
-    </van-popup>
+    </van-popup> -->
   </div>
 
 </template>
@@ -140,12 +139,12 @@ export default {
   .banner
     width 100%
     height 340px
+    position absolute
   .top
     width 100%
-    height 340px
-    position absolute
+    height 390px
     z-index 1
-    color #ffffff
+    color #000000
     top 0
     .intergralCon
       font-size 35px
@@ -157,12 +156,14 @@ export default {
       border-radius 23px
       border 2px solid #ffffff
       font-size 27px
-      margin-top 20px
+      margin-top 24px
+      border 2px solid #969696
   .content
     width 690px
-    box-shadow 1px 1px 5px #eaeaea
-    border-radius 20px
-    margin-top -70px
+    // box-shadow 1px 1px 5px #eaeaea
+    // border-radius 20px
+    border 2px solid #000000
+    // margin-top -70px
     background-color #ffffff
     .item
       margin 0 62px 0 33px
@@ -175,10 +176,11 @@ export default {
         width 400px
         .row
           .title
-            color #b9a484
+            color #000000
+            font-size 32px
         .des
           font-size 27px
-          color #808080
+          color #000000
         .tip
           font-size 25px
           color #d5d5d5
@@ -188,6 +190,7 @@ export default {
         border-radius 5px
         background-color #b9a484
         color #ffffff
+        margin-bottom 40px
   .pop
     .wrapper
       width 475px

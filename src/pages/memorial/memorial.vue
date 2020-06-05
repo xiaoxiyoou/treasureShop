@@ -69,7 +69,8 @@ export default {
       window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=8XIG1EMzxiDXykWrCIp_DQ=='
     },
     make() {
-      window.location.href = 'http://b.fuyulove.com/3g/login.aspx'
+      // window.location.href = 'http://b.fuyulove.com/3g/login.aspx'
+      window.location.href = 'http://b.fuyulove.com/4g/Index.aspx?rem=0.396683284127912'
     },
 
 

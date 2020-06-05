@@ -1,10 +1,10 @@
 <template>
   <div class="container col a-c">
-    <img class="banner" src="./banner.png" alt="">
+    <!-- <img class="banner" src="./banner.png" alt=""> -->
     <div class="top row j-b a-c">
       <div class="item row a-c">
-        <img class="grail" src="./grail.png" alt="">
-        <div>积分排行榜</div>
+        <!-- <img class="grail" src="./grail.png" alt="">
+        <div>积分排行榜</div> -->
       </div>
       <div class="btn row a-c j-c" @click="IntegralRecord">积分纪录</div>
     </div>
@@ -15,7 +15,7 @@
       </div>
       <div class="item col a-c">
         <img class="titleImg" :src="self.imgurl" alt="">
-        <div class="title2">{{self.orgname}}</div>
+        <div class="title2" style="color:#000000">{{self.orgname}}</div>
       </div>
       <div class="item col a-c" style="width:25%">
         <div class="title">积分</div>
@@ -26,12 +26,11 @@
       <div class="tab row a-c  van-hairline--bottom">
         <div class="tabItem row a-c" v-for="(item,index) in title" :class="{'active':isActive==index}" :key="index" @click="tab(index)">{{item}}</div>
       </div>
-
-      <div class="item row a-c j-b van-hairline--bottom" v-for="(item,index) in list" :key="index">
+      <div class="item row a-c j-b " v-for="(item,index) in list" :key="index">
         <div class="left row a-c">
           <img class="titleImg" v-if="index == 0" src="./champion.png" alt="">
-          <img class="titleImg" v-else-if="index == 1" src="./runner.png" alt="">
-          <img class="titleImg" v-else-if="index == 2" src="./June.png" alt="">
+          <img class="titleImg" v-else-if="index == 1" src="./June.png" alt="">
+          <img class="titleImg" v-else-if="index == 2" src="./runner.png" alt="">
           <div class="title row a-c j-c" v-else>1</div>
           <div>
             <img class="headImg" :src="item.imgurl" alt="">
@@ -105,10 +104,10 @@ export default {
     height 310px
     z-index -1
   .top
-    width 100%
+    width 703px
     padding 0 19px 0 26px
     margin-top 41px
-    color #ffffff
+    text-align right
     .item
       font-size 44px
       .grail
@@ -116,32 +115,36 @@ export default {
         height 44px
         margin-right 20px
     .btn
+      color #000000
       width 146px
       height 46px
-      background-color #b8275c
+      // background-color #b8275c
       border-radius 23px
+      border 2px solid #969696
       font-size 27px
   .mid
     width 690px
     background-color #ffffff
-    border-radius 20px
-    margin-top 162px
+    margin-top 36px
+    height 165px
     padding 0 50px
-    box-shadow 1px 1px 5px #eaeaea
+    // border-radius 20px
+    // box-shadow 1px 1px 5px #eaeaea
+    border 2px solid #000000
     white-space nowrap
     .item
       .titleImg
-        width 184px
-        height 184px
+        width 135px
+        height 135px
         border-radius 50%
-        margin-top -70px
+        margin-top -67px
         box-shadow 1px 1px 5px #eaeaee
       .title
         font-size 32px
         color #666666
         margin-bottom 10px
       .des
-        font-size 42px
+        font-size 27px
         color #b9a484
       .title2
         color #666666
@@ -149,19 +152,20 @@ export default {
         margin-bottom 30px
         margin-top 10px
         overflow hidden
-        display -webkit-box
+        // display -webkit-box
         -webkit-box-orient vertical
         -webkit-line-clamp 1
         text-overflow ellipsis
         width 300px
         text-align center
+        margin-top 10px
 .content
   width 691px
-  box-shadow 1px 1px 5px #eaeaea
-  border-radius 20px
+  // box-shadow 1px 1px 5px #eaeaea
+  // border-radius 20px
   background-color #ffffff
-  margin-top 38px
-  // height 80%
+  margin-top 22px
+  border 2px solid #000000
   .tab
     margin 0 38px 0 56px
     height 85px
@@ -190,15 +194,15 @@ export default {
         margin-right 10px
         display block
       .titleImg
-        width 52px
-        height 61px
+        width 42px
+        height 38px
         margin-right 30px
       .des
         font-size 27px
         color #808080
       .tip
         font-size 27px
-        color #d5d5d5
+        color #969696
         margin-top 5px
         overflow hidden
         display -webkit-box
@@ -207,5 +211,5 @@ export default {
         text-overflow ellipsis
     .btn
       margin-right 50px
-      color #b9a484
+      color #000000
 </style>
