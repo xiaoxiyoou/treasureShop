@@ -37,6 +37,7 @@ import { getVideoDetail } from 'api/index'
 export default {
   data() {
     return {
+      videoIndex: 0,
 
       title: '',
       videos: [
@@ -97,7 +98,7 @@ export default {
       this.$refs.video.addEventListener('ended', () => {
         console.log('播放结束')
         if (this.defaultIdndex < this.videos.length - 1) {
-          this.episodeSelect(this.defaultIdndex++)
+          this.episodeSelect(this.videoIndex + 1)
         }
 
       })

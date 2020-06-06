@@ -176,15 +176,14 @@ export default {
       position absolute
       width 170px
       height 50px
-      background-color #a9365d
       border-radius 25px
+      border 2px solid #c1b199
       right 13px
       bottom 25px
-      color #ffffff
+      color #c1b199
       font-size 30px
   .item-wrapper
     color #ffffff
-    // padding-top 100px
     font-size 30px
     height 500px
     .border-right
