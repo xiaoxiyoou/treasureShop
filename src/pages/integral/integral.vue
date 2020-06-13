@@ -9,7 +9,7 @@
       <div class="btn row a-c j-c" @click="record">积分纪录</div>
     </div>
     <div class="content">
-      <div class="item row a-c j-b van-hairline--bottom">
+      <!-- <div class="item row a-c j-b van-hairline--bottom">
         <div class="left col">
           <div class="row a-c">
             <img class="icon" src="./icon.png" alt="">
@@ -21,7 +21,7 @@
         </div>
         <div class="btn row a-c j-c" v-if="loginsign" @click="_loginsign">领取</div>
         <div class="btn row a-c j-c" v-else>已领取</div>
-      </div>
+      </div> -->
       <!-- <div class="item row a-c j-b van-hairline--bottom">
         <div class="left col">
           <div class="row a-c">
@@ -33,9 +33,9 @@
         </div>
         <div class="btn row a-c j-c" v-if="sign" @click="_sign">签到</div>
         <div class="btn row a-c j-c" v-else>已签到</div>
-      </div>
+      </div>-->
       <div class="item row a-c j-b van-hairline--bottom">
-        <div class="left col">
+        <div class="left col j-a" style="height:100%">
           <div class="row a-c">
             <img class="icon" src="./icon.png" alt="">
             <div class="title">获得1:10积分</div>
@@ -43,7 +43,7 @@
           <div class="des">完成家族宝进货换取积分</div>
           <div class="tip" style="white-space:nowrap">根据进货金额按10元货得1积分原则兑换积分</div>
         </div>
-      </div>-->
+      </div>
     </div> 
     <!-- <van-popup v-model="show" class="pop " round>
       <div class="wrapper col a-c">

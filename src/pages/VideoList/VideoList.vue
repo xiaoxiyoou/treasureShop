@@ -9,9 +9,9 @@
             <div class="desc">{{item.videodesc}}</div>
           </div>
           <div class="infoData row j-b">
-            <div class="viewNum">{{item.createtime | moment}}</div>
+            <!-- <div class="viewNum">{{item.createtime | moment}}</div> -->
             <div class="integral" v-if="item.isfree == 2">{{item.videoprice}}积分</div>
-            <div class="integral" v-if="item.isfree == 1">{{item.saleprice}}元</div>
+            <div class="integral" v-else-if="item.isfree == 1">{{item.saleprice}}元</div>
             <div class="integral" v-else>免费</div>
           </div>
         </div>

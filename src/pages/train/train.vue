@@ -20,17 +20,17 @@ s<template>
     <div class="item-wrapper row f-w j-c a-c">
       <div class="item col j-c a-c border-right" @click="VideoList(18)">
         <img src="./course.png" alt="" />
-        <div>免费课程</div>
+        <div>专属课程</div>
       </div>
-      <div class="item col j-c a-c  border-right" @click="VideoList(19)">
+      <!-- <div class="item col j-c a-c  border-right" @click="VideoList(19)">
         <img src="./integralcourse.png" alt="" />
         <div>积分课程</div>
       </div>
       <div class="item col j-c a-c " @click="VideoList(20)">
         <img src="./pay.png" alt="" />
         <div>付费课程</div>
-      </div>
-      <div class="item col j-c a-c border-right" @click="integralRank()">
+      </div> -->
+      <div class="item col j-c a-c" @click="integralRank()">
         <img src="./integral.png" alt="" />
         <div>诚商积分</div>
       </div>
@@ -191,7 +191,7 @@ export default {
     .border-bottom
       border-bottom 2px solid rgba(255, 255, 255, 0.2)
     .item
-      width 33%
+      width 45%
       height 100px
       img
         width 57px

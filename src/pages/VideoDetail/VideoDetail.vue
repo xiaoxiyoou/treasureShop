@@ -28,7 +28,27 @@
       <div v-if="VideoObj.isfree == 0" class="value border-left-1px" @click="view">
         免费观看
       </div>
+      <div v-if="VideoObj.isfree == 2" class="value border-left-1px" @click="view">
+        {{VideoObj.videoprice}}积分
+      </div>
     </div>
+    <!-- 购买积分 -->
+    <van-popup v-model="popShow1" class="popShow col a-c">
+      <div class="title">学习课程</div>
+      <div class="user">使用100积分学习该课程</div>
+      <div class="save">当前剩余积分：1000</div>
+      <div class="btn row a-c j-c">取消</div>
+    </van-popup>
+    <!-- 积分不足弹出 -->
+    <van-popup v-model="popShow2" class="popShow col a-c">
+      <div class="title2">抱歉，您当前积分不足！</div>
+      <div class="user">使用100积分学习该课程</div>
+      <div class="save">当前剩余积分：1000</div>
+      <div class="btn1 row a-c j-c" @click="cancel">取消</div>
+      <div class="btn1 row a-c j-c" @click="call">联系客服</div>
+      <div class="tip">提示：如果您已经进货未获取积分
+        请联系客服。</div>
+    </van-popup>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -37,6 +57,8 @@ import { getVideoDetail } from 'api/index'
 export default {
   data() {
     return {
+      popShow1: false,
+      popShow2: true,
       videoIndex: 0,
 
       title: '',
@@ -118,6 +140,13 @@ export default {
     // 点击底部观看
     view() {
       this.$refs.video.play()
+    },
+    call() {
+      window.location.href = 'tel://' + "13125418768"
+    },
+    // 取消购买
+    cancel() {
+      this.popShow2 = false
     }
 
 
@@ -191,10 +220,7 @@ export default {
   background: #b2a189;
   color: #ffffff;
 }
-.topContent {
-  /* position: absolute;
-  width: 100%; */
-}
+
 .container > .detalItem {
   width: 100%;
   padding: 30px;
@@ -204,15 +230,58 @@ export default {
 .topContent >>> .video-js:hover .vjs-big-play-button {
   background: rgba(0, 0, 0, 0);
 }
+/* 积分购买弹框 */
+.popShow {
+  width: 511px;
+  border-radius: 10px;
+}
+.popShow > .title {
+  color: #000000;
+  font-size: 40px;
+  letter-spacing: 30px;
+  margin-top: 65px;
+}
+.popShow > .title2 {
+  color: #000000;
+  font-size: 40px;
+  margin-top: 65px;
+}
+.popShow > .user {
+  color: #ae9f88;
+  font-size: 40px;
+  margin-top: 65px;
+}
+.popShow > .save {
+  color: #000000;
+  font-size: 27px;
+  margin-top: 70px;
+}
+.popShow > .tip {
+  color: #000000;
+  font-size: 27px;
+  width: 400px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+}
+.popShow > .btn {
+  color: #ffffff;
+  font-size: 40px;
+  width: 400px;
+  height: 74px;
+  border-radius: 5px;
+  background-color: #ae9f88;
+  margin-top: 22px;
+  margin-bottom: 48px;
+}
+.popShow > .btn1 {
+  color: #ffffff;
+  font-size: 40px;
+  width: 400px;
+  height: 74px;
+  border-radius: 5px;
+  background-color: #ae9f88;
+  margin-top: 22px;
+}
 </style>
-<style scoped lang="stylus">
->>>img
-  max-width 100%
->>> .video-js .vjs-big-play-button
-  height 3em !important
-  width 3em !important
-  line-height 3em !important
-  border-radius 1.5em !important
-  margin-left -1.1em !important
-</style>
+
 
