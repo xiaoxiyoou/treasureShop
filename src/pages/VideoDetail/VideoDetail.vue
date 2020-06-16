@@ -1,14 +1,15 @@
 ﻿<template>
   <div class="container" v-wechat-title="title">
-    <div class="">
+    <div class="" v-show="!popShow1&&!popShow2">
       <video class="video-player" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-orientation="h5" x5-video-player-fullscreen="true" x5-playsinline preload="auto" controlslist="nodownload" controls="false" ref="video" :src="videos[0].videopath" :poster="VideoObj.videoimg">
         <source :src="videos[0].videopath" type="video/mp4">
       </video>
     </div>
+    <img v-if="popShow1 || popShow2" class="videoImg" :src="VideoObj.videoimg" alt="">
 
     <!-- 集数展示 -->
     <div class="episodes-wrapper row" v-if="videos && videos.length > 1">
-      <div class="episodes col a-c j-c" v-for="(item, index) in videos" :key="index" @click="episodeSelect(index)" :class="defaultIdndex == index ? 'selectHover' : ''">
+      <div class="episodes col a-c j-c" v-for="(item, index) in videos" :key="index" @click="episodeSelect(index,item.title,item.looktime)" :class="defaultIdndex == index ? 'selectHover' : ''">
         {{ item.title }}
       </div>
     </div>
@@ -17,7 +18,6 @@
       <p class="desc" v-html="VideoObj.videocontent" v-if="VideoObj.videocontent"></p>
       <p class="desc" v-else style="margin-top:30px">暂无介绍内容~</p>
     </div>
-    <!-- </div> -->
     <!-- 底部 -->
     <div class="btm row a-c van-hairline--top">
       <div class="btmHomeCon row a-c j-c">
@@ -28,22 +28,25 @@
       <div v-if="VideoObj.isfree == 0" class="value border-left-1px" @click="view">
         免费观看
       </div>
-      <div v-if="VideoObj.isfree == 2" class="value border-left-1px" @click="view">
+      <div v-if="VideoObj.isfree == 2 &&VideoObj.isbuy==0" class="value border-left-1px" @click="view">
         {{VideoObj.videoprice}}积分
+      </div>
+      <div v-if="VideoObj.isfree == 2 &&VideoObj.isbuy==1" class="value border-left-1px" @click="view">
+        已购买
       </div>
     </div>
     <!-- 购买积分 -->
-    <van-popup v-model="popShow1" class="popShow col a-c">
+    <van-popup v-model="popShow1" class="popShow col a-c" closeable>
       <div class="title">学习课程</div>
-      <div class="user">使用100积分学习该课程</div>
-      <div class="save">当前剩余积分：1000</div>
-      <div class="btn row a-c j-c">取消</div>
+      <div class="user">使用{{VideoObj.videoprice}}积分学习该课程</div>
+      <div class="save">当前剩余积分：{{capi.integral}}</div>
+      <div class="btn row a-c j-c" @click="_buyvideo">确认</div>
     </van-popup>
     <!-- 积分不足弹出 -->
-    <van-popup v-model="popShow2" class="popShow col a-c">
+    <van-popup v-model="popShow2" class="popShow col a-c" closeable>
       <div class="title2">抱歉，您当前积分不足！</div>
-      <div class="user">使用100积分学习该课程</div>
-      <div class="save">当前剩余积分：1000</div>
+      <div class="user">使用{{VideoObj.videoprice}}积分学习该课程</div>
+      <div class="save">当前剩余积分：{{capi.integral}}</div>
       <div class="btn1 row a-c j-c" @click="cancel">取消</div>
       <div class="btn1 row a-c j-c" @click="call">联系客服</div>
       <div class="tip">提示：如果您已经进货未获取积分
@@ -52,15 +55,19 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-import { getVideoDetail } from 'api/index'
-
+import { getVideoDetail, getinfo, buyvideo, playlook } from 'api/index'
+import { Toast } from 'vant'
 export default {
   data() {
     return {
+      state: 0,
+      duration: '',
+      looktime: '',
+      videotitle: '',
+      capi: '',
       popShow1: false,
-      popShow2: true,
+      popShow2: false,
       videoIndex: 0,
-
       title: '',
       videos: [
         {
@@ -76,6 +83,7 @@ export default {
 
   created() {
     this._getVideoDetail()
+    this._getinfo()
 
   },
   mounted() {
@@ -84,11 +92,59 @@ export default {
 
 
   },
+  beforeDestroy() {
+    this._playlook(0, this.$refs.video.currentTime)
+  },
 
   methods: {
+    _playlook(looktime) {
+      console.log(looktime)
+      console.log(this.duration)
+      if (looktime < this.duration) {
+        playlook({
+          id: this.VideoObj.videoid,
+          title: this.videotitle,
+          state: this.state,
+          looktime: looktime,
+        }).then(res => {
+          console.log('记录播放暂停', res)
+          console.log('this.videotitle', this.videotitle)
 
+        })
+      }
+    },
+    _playEnd(looktime) {
+      playlook({
+        id: this.VideoObj.videoid,
+        title: this.videotitle,
+        state: 1,
+        looktime: looktime,
+      }).then(res => {
+        console.log('记录播放结束', res)
+        console.log('this.videotitle', this.videotitle)
 
+      })
 
+    },
+    // 积分购买
+    _buyvideo() {
+      buyvideo({
+        id: this.VideoObj.videoid
+      }).then(res => {
+        console.log('积分购买', res)
+        if (res.code == 0) {
+          Toast('购买成功')
+          this.popShow1 = false
+          this._getVideoDetail()
+        } else if (res.code == 1) {
+          this.popShow2 = true
+          this.popShow1 = false
+        } else {
+          Toast(res.msg)
+        }
+
+      })
+    },
     // 视频详情数据
     _getVideoDetail() {
       getVideoDetail({
@@ -99,12 +155,15 @@ export default {
           this.VideoObj = Object.assign({}, res.data)
           this.videos = this.VideoObj.videos
           this.title = this.VideoObj.videoname
-          this.VideoStart()
-          this.VideoEnded()
+          this.looktime = this.videos[0].looktime
+          this.videotitle = this.videos[0].title
+          console.log(' this.looktime', this.looktime)
+          this.$nextTick(() => {
+            this.VideoStart()
+            this.VideoEnded()
+            this.VideoPause()
 
-
-
-
+          })
         }
       })
     },
@@ -112,17 +171,52 @@ export default {
     // 监听视频播放
     VideoStart() {
       this.$refs.video.addEventListener('play', () => {
+        if (this.looktime) {
+          this.$refs.video.currentTime = this.looktime
+        }
+        this.looktime = 0
+        this.duration = this.$refs.video.duration
         console.log('播放')
+        // 如果是积分课程未购买
+        if (this.VideoObj.isbuy == 0 && this.VideoObj.isfree == 2) {
+          this.popShow1 = true
+          setTimeout(() => {
+            this.$refs.video.pause()
+          }, "500");
+        }
       })
     },
-    // 监听播放结束
+    // 获取商家信息
+    _getinfo() {
+      getinfo().then(res => {
+        console.log('获取商家信息', res)
+        if (res.code == 0) {
+          this.userinfo = res.data.info
+          this.capi = res.data.capi
+        } else {
+          this.$router.push({
+            path: '/login',
+          })
+        }
+      })
+
+    },
+    // 监听播放完全结束
     VideoEnded() {
       this.$refs.video.addEventListener('ended', () => {
         console.log('播放结束')
+        this._playEnd(this.$refs.video.currentTime)
         if (this.defaultIdndex < this.videos.length - 1) {
-          this.episodeSelect(this.videoIndex + 1)
+          this.episodeSelect(this.videoIndex + 1, this.videos[this.videoIndex + 1].title)
         }
-
+      })
+    },
+    // 监听播放暂停
+    VideoPause() {
+      this.$refs.video.addEventListener('pause', () => {
+        console.log('暂停')
+        console.log(this.$refs.video.currentTime)
+        this._playlook(this.$refs.video.currentTime)
       })
     },
     // 回首页
@@ -130,27 +224,26 @@ export default {
       this.$router.replace({ path: '/train' })
     },
     // 精品课程点击  
-    episodeSelect(flag) {
+    episodeSelect(flag, videotitle, looktime) {
       this.defaultIdndex = flag
       this.videoIndex = flag
       this.$refs.video.src = this.videos[flag].videopath
       this.$refs.video.play()
-
+      // 只在最初和切换视频时候设定
+      this.videotitle = videotitle
+      this.looktime = looktime
     },
     // 点击底部观看
     view() {
       this.$refs.video.play()
     },
     call() {
-      window.location.href = 'tel://' + "13125418768"
+      window.location.href = 'tel:' + 13125418768
     },
     // 取消购买
     cancel() {
       this.popShow2 = false
     }
-
-
-
   }
 }
 </script>
@@ -161,6 +254,10 @@ export default {
   width: 100%;
   position: absolute;
   top: 0;
+}
+.videoImg {
+  height: 420px;
+  width: 100%;
 }
 .episodes-wrapper {
   background: #ffffff;

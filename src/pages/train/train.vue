@@ -83,7 +83,7 @@ export default {
     },
     _getinfo() {
       getinfo().then(res => {
-        console.log('用户信息', res)
+        console.log('获取商家信息', res)
         if (res.code == 0) {
           this.userinfo = res.data.info
           this.capi = res.data.capi

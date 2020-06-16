@@ -1,12 +1,16 @@
 import ajax from './ajax'
 
 // 1. 定义基础路径
-
-// 
+// 商家
 const SHOP_URL = 'http://union.app.jzb768.com/'
+// 产品
 const BASE_URL = 'http://product.jzb768.com/'
 // 纪念堂
 const URL = 'http://partner.fuyulove.com/'
+// 视频播放进度
+export const playlook = (params) => ajax(SHOP_URL + 'api/video/playlook', params, 'POST')
+// 积分购买课程
+export const buyvideo = (params) => ajax(SHOP_URL + 'api/video/buyvideo', params)
 // 获取信息
 export const getinfo = (params) => ajax(SHOP_URL + 'api/union/getinfo', params)
 // 案例
