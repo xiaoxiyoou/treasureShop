@@ -60,6 +60,7 @@ import { Toast } from 'vant'
 export default {
   data() {
     return {
+      Pause: true,
       state: 0,
       duration: '',
       looktime: '',
@@ -93,26 +94,31 @@ export default {
 
   },
   beforeDestroy() {
-    this._playlook(0, this.$refs.video.currentTime)
+    console.log('执行')
+    this.$refs.video.pause()
+    this.Pause = false
+
+    this._playlook(this.$refs.video.currentTime)
   },
 
   methods: {
+    // 播放暂停记录
     _playlook(looktime) {
-      console.log(looktime)
-      console.log(this.duration)
       if (looktime < this.duration) {
         playlook({
           id: this.VideoObj.videoid,
           title: this.videotitle,
-          state: this.state,
+          state: 0,
           looktime: looktime,
         }).then(res => {
-          console.log('记录播放暂停', res)
+          console.log('播放暂停记录', res)
           console.log('this.videotitle', this.videotitle)
+          console.log('looktime', looktime)
 
         })
       }
     },
+    // 播放结束记录
     _playEnd(looktime) {
       playlook({
         id: this.VideoObj.videoid,
@@ -122,6 +128,7 @@ export default {
       }).then(res => {
         console.log('记录播放结束', res)
         console.log('this.videotitle', this.videotitle)
+        console.log('looktime', looktime)
 
       })
 
@@ -157,32 +164,12 @@ export default {
           this.title = this.VideoObj.videoname
           this.looktime = this.videos[0].looktime
           this.videotitle = this.videos[0].title
-          console.log(' this.looktime', this.looktime)
+          console.log('this.looktime', this.looktime)
           this.$nextTick(() => {
             this.VideoStart()
             this.VideoEnded()
             this.VideoPause()
-
           })
-        }
-      })
-    },
-
-    // 监听视频播放
-    VideoStart() {
-      this.$refs.video.addEventListener('play', () => {
-        if (this.looktime) {
-          this.$refs.video.currentTime = this.looktime
-        }
-        this.looktime = 0
-        this.duration = this.$refs.video.duration
-        console.log('播放')
-        // 如果是积分课程未购买
-        if (this.VideoObj.isbuy == 0 && this.VideoObj.isfree == 2) {
-          this.popShow1 = true
-          setTimeout(() => {
-            this.$refs.video.pause()
-          }, "500");
         }
       })
     },
@@ -201,23 +188,45 @@ export default {
       })
 
     },
-    // 监听播放完全结束
+
+    // 监听播放
+    VideoStart() {
+      this.$refs.video.addEventListener('play', () => {
+        if (this.looktime) {
+            this.$refs.video.currentTime = this.looktime
+        }
+        this.looktime = 0
+        this.duration = this.$refs.video.duration
+        // 如果是积分课程未购买
+        if (this.VideoObj.isbuy == 0 && this.VideoObj.isfree == 2) {
+          this.popShow1 = true
+          setTimeout(() => {
+            this.$refs.video.pause()
+          }, "500");
+        }
+      })
+    },
+
+    // 监听结束
     VideoEnded() {
       this.$refs.video.addEventListener('ended', () => {
-        console.log('播放结束')
         this._playEnd(this.$refs.video.currentTime)
+        // 切换下一集
         if (this.defaultIdndex < this.videos.length - 1) {
           this.episodeSelect(this.videoIndex + 1, this.videos[this.videoIndex + 1].title)
         }
       })
     },
-    // 监听播放暂停
+    // 监听暂停
     VideoPause() {
-      this.$refs.video.addEventListener('pause', () => {
-        console.log('暂停')
-        console.log(this.$refs.video.currentTime)
-        this._playlook(this.$refs.video.currentTime)
-      })
+      console.log("打印", this.Pause)
+      if (this.Pause) {
+        this.$refs.video.addEventListener('pause', () => {
+          if (this.$refs.video.currentTime) {
+            this._playlook(this.$refs.video.currentTime)
+          }
+        })
+      }
     },
     // 回首页
     homeback() {
