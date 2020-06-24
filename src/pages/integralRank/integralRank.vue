@@ -23,21 +23,22 @@
       </div>
     </div>
     <div class="content">
-      <div class="tab row a-c  van-hairline--bottom">
-        <div class="tabItem row a-c" v-for="(item,index) in title" :class="{'active':isActive==index}" :key="index" @click="tab(index)">{{item}}</div>
+      <div class="tab row a-c j-b van-hairline--bottom">
+        <div class="tabItem row a-c " v-for="(item,index) in title" :class="{'active':isActive==index}" :key="index" @click="tab(index,item.type)">{{item.name}}</div>
       </div>
       <div class="item row a-c j-b " v-for="(item,index) in list" :key="index">
         <div class="left row a-c">
           <img class="titleImg" v-if="index == 0" src="./champion.png" alt="">
           <img class="titleImg" v-else-if="index == 1" src="./June.png" alt="">
           <img class="titleImg" v-else-if="index == 2" src="./runner.png" alt="">
-          <div class="title row a-c j-c" v-else>1</div>
+          <div class="title row a-c j-c" v-else>{{index + 1}}</div>
           <div>
             <img class="headImg" :src="item.imgurl" alt="">
           </div>
           <div class="tip">{{item.orgname}}</div>
         </div>
-        <div class="btn row a-c j-c">{{item.integral}}积分</div>
+        <div class="btn row4 a-c j-c" v-if="type == 4">{{item.integral}}%</div>
+        <div class="btn row2 a-c j-c" v-else>{{item.integral}}积分</div>
       </div>
 
       <noMessage :noinfoShow="noinfoShow" />
@@ -52,31 +53,38 @@ import { IntegralRank } from 'api/index'
 export default {
   data() {
     return {
-      title: ['总积分排行'],
+      title: [{name:'总积分',type:0},{name:'学习使用积分',type:1},{name:'月积分',type:3},{name:'增长率',type:4}],
+      // title: [{name:'总积分',type:0}],
       isActive: 0,
       noinfoShow: false,
       list: [],
-      self: ""
+      self: "",
+      type:0
 
     }
   },
   mounted() {
     document.body.scrollTop = document.documentElement.scrollTop = 0
-    this._IntegralRank()
+    this._IntegralRank(this.type)
     window.WeixinJSBridge.call('hideOptionMenu');
 
   },
   methods: {
-    _IntegralRank() {
-      IntegralRank().then(res => {
+    _IntegralRank(type) {
+      IntegralRank({
+        type:type
+      }).then(res => {
         console.log('积分排行', res)
         this.list = res.data.list
         this.self = res.data.self
       })
     },
 
-    tab(flag) {
+    tab(flag,type) {
       this.isActive = flag
+      console.log(type)
+      this.type = type
+      this._IntegralRank(type) 
     },
     IntegralRecord() {
       this.$router.push({
@@ -93,7 +101,7 @@ export default {
 </script>
 <style scoped lang="stylus">
 .container
-  position absolute
+  // position absolute
   top 0px
   width 100%
   height 100%
@@ -108,6 +116,7 @@ export default {
     padding 0 19px 0 26px
     margin-top 41px
     text-align right
+    height 44px
     .item
       font-size 44px
       .grail
@@ -184,23 +193,22 @@ export default {
         color #333333
         font-weight 700
         font-size 30px
-        margin-right 30px
-        width 52px
-        height 61px
+        width 42px
+        height 38px
       .headImg
         width 75px
         height 75px
         border-radius 50%
-        margin-right 10px
         display block
+        margin-left 15px
       .titleImg
         width 42px
         height 38px
-        margin-right 30px
       .des
         font-size 27px
         color #808080
       .tip
+        margin-left  15px
         font-size 27px
         color #969696
         margin-top 5px
@@ -209,7 +217,7 @@ export default {
         -webkit-box-orient vertical
         -webkit-line-clamp 1
         text-overflow ellipsis
+        width 280px
     .btn
-      margin-right 50px
       color #000000
 </style>
