@@ -13,11 +13,12 @@
         <div class="swiper-button-prev rightOne" slot="button-prev"></div>
         <div class="shop">连云港永安堂殡葬服务公司</div>
       </div>
-      <img class="pic" src="./pic2.png" alt="">
+      <img class="title1" src="./pic3.png" alt="">
+      <img class="title" src="./pic2.png" alt="">
       <div class="content col a-c">
-        <img class="top" src="./title.png" alt="" ref="pronbit">
+        <img class="top" src="./join.png" alt="" ref="pronbit">
         <div class="item col a-c">
-          <input class="name com" type="text" placeholder="请输入您的姓名" v-model="name">
+          <input class="name com" type="text" placeholder="请输入您的称呼" v-model="name">
           <input class="tel com" type="number" placeholder="请输入手机号码" v-model="mobile">
           <input class="address com" placeholder="请选择您所在的城市" v-model="address" @click="areaShowList" readonly="readonly">
           <div class="receive row a-c">
@@ -26,20 +27,19 @@
             <div class="text" v-if="select">我已阅读并接受《服务须知》《隐私政策》</div>
             <div class="text textHover" v-if="!select">我已阅读并接受《服务须知》《隐私政策》</div>
           </div>
-          <div class="textbtn row j-c a-c" @click="_unionApply">立即申请</div>
+          <div class="textbtn row j-c a-c" @click="_unionApply">马上申请</div>
           <div class="tip">请填写您的联系方式以便为您安排专员服务。</div>
         </div>
       </div>
     </div>
 
     <div class="btmFix row a-c j-c" v-if="showBtn"></div>
-    <div class="btn row j-c a-c" v-if="showBtn" @click="scrollIntoView">立即申请</div>
+    <div class="btn row j-c a-c" v-if="showBtn" @click="scrollIntoView">马上申请</div>
     <!-- 城市选择 -->
     <van-popup v-model="areaShow" position="bottom">
       <van-area :area-list="areaList" title="请选择地址" @confirm="adConfirm" @cancel="adcancel" />
     </van-popup>
   </div>
-
 </template>
 <script type="text/ecmascript-6">
 import { Toast } from 'vant'
@@ -175,6 +175,9 @@ export default {
       width 600px
       vartical-align bottom
       margin-top 55px
+    .title1
+      width 600px
+      vartical-align bottom
   .pic
     width 650px
     display block
@@ -199,23 +202,25 @@ export default {
       display block
       text-align center
       font-size 25px
-      margin-top 10px
+      padding-top 10px
+      background-color #7c7161
+      width 600px
   .content
-    background-color #9D8E80
-    width 650px
+    background-color #ffffff
+    width 600px
     margin 0 auto
     text-align center
-    padding-bottom 38px
+    margin-top 69px
+    margin-bottom 200px
     .top
-      width 420px
-      margin-bottom 36px
+      width 446px
+      margin-top 32px
     .title
       width 535px
       margin 40px auto
     .item
       background-color #ffffff
-      width 569px
-      margin-bottom 150px
+      width 600px
       .com
         width 495px
         height 66px
@@ -223,7 +228,7 @@ export default {
         border 2px solid #b2a189
         margin-top 33px
         padding-left 20px
-        font-size 30px
+        font-size 25px
       .receive
         color #e0e0e0
         margin-top 28px
@@ -246,7 +251,7 @@ export default {
         border-radius 10px
         background-color #7c7161
         color #ffffff
-        font-size 36px
+        font-size 30px
         margin-top 30px
   .btmFix
     position fixed

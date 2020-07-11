@@ -40,10 +40,8 @@
         <div class="btn row4 a-c j-c" v-if="type == 4">{{item.integral}}%</div>
         <div class="btn row2 a-c j-c" v-else>{{item.integral}}积分</div>
       </div>
-
       <noMessage :noinfoShow="noinfoShow" />
     </div>
-
   </div>
 
 </template>
@@ -53,13 +51,12 @@ import { IntegralRank } from 'api/index'
 export default {
   data() {
     return {
-      title: [{name:'总积分',type:0},{name:'学习使用积分',type:1},{name:'月积分',type:3},{name:'增长率',type:4}],
-      // title: [{name:'总积分',type:0}],
-      isActive: 0,
+      title: [{ name: '总计积分', type: 0 }, { name: '学习积分', type: 1 }, { name: ' 当月积分', type: 3 }, { name: '增长排名', type: 4 }],
+      isActive:this.$route.query.type - 1 || 0,
       noinfoShow: false,
       list: [],
       self: "",
-      type:0
+      type: this.$route.query.type|| 0 
 
     }
   },
@@ -70,9 +67,10 @@ export default {
 
   },
   methods: {
+
     _IntegralRank(type) {
       IntegralRank({
-        type:type
+        type: type
       }).then(res => {
         console.log('积分排行', res)
         this.list = res.data.list
@@ -80,11 +78,11 @@ export default {
       })
     },
 
-    tab(flag,type) {
+    tab(flag, type) {
       this.isActive = flag
       console.log(type)
       this.type = type
-      this._IntegralRank(type) 
+      this._IntegralRank(type)
     },
     IntegralRecord() {
       this.$router.push({
@@ -208,7 +206,7 @@ export default {
         font-size 27px
         color #808080
       .tip
-        margin-left  15px
+        margin-left 15px
         font-size 27px
         color #969696
         margin-top 5px

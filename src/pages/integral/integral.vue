@@ -44,7 +44,19 @@
           <div class="tip" style="white-space:nowrap">根据进货金额按10元货得1积分原则兑换积分</div>
         </div>
       </div>
-    </div> 
+      <div class="item row a-c j-b van-hairline--bottom">
+        <div class="left col j-a" style="height:100%">
+          <div class="row a-c">
+            <img class="icon" src="./icon.png" alt="">
+            <div class="title">获得300积分</div>
+          </div>
+          <div class="des">当月增长率前十名</div>
+          <div class="tip" style="white-space:nowrap">当月增长率前十名奖励300积分</div>
+        </div>
+        <div class="btn row a-c j-c" @click="integralRank">查看排名</div>
+      </div>
+
+    </div>
     <!-- <van-popup v-model="show" class="pop " round>
       <div class="wrapper col a-c">
         <div class="title">兑换积分</div>
@@ -79,6 +91,14 @@ export default {
 
   },
   methods: {
+    integralRank() {
+      this.$router.push({
+        path: '/integralRank',
+        query: {
+          type: 4,
+        }
+      })
+    },
     _Integral() {
       Integral().then(res => {
         console.log('获取积分状态', res)
@@ -162,12 +182,13 @@ export default {
     width 690px
     // box-shadow 1px 1px 5px #eaeaea
     // border-radius 20px
-    border 2px solid #000000
     // margin-top -70px
     background-color #ffffff
     .item
-      margin 0 62px 0 33px
+      border 2px solid #000000
+      padding 0 62px 0 33px
       height 202px
+      margin-top 20px
       img
         width 30px
         height 32px
@@ -190,7 +211,8 @@ export default {
         border-radius 5px
         background-color #b9a484
         color #ffffff
-        margin-bottom 40px
+        // margin-bottom 40px
+        font-size 25px
   .pop
     .wrapper
       width 475px

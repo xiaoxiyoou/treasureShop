@@ -10,6 +10,10 @@
       <img class="name" src="./password.png" alt="">
       <input type="password" placeholder="请输入密码" v-model="password">
     </div>
+    <!-- <div class="checked-wrap row">
+      <img class="checked-img" src="./check.png" alt="">
+      <div class="checked-text">绑定此微信</div>
+    </div> -->
     <div class="btn row a-c j-c" @click="login">立即登录</div>
     <van-divider :style="{ color: '#b8275c', borderColor: '#eaeaea'}" @click="apply">
       申请入驻
@@ -118,6 +122,11 @@ export default {
       height 37px
     input
       margin-left 39px
+  .checked-wrap
+     width 602px
+     margin-top 10px
+     .checked-text
+      color 
   .btn
     width 626px
     height 87px

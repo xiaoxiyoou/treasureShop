@@ -1,45 +1,56 @@
-<template>
-  <div class="container col">
+s<template>
+  <div class="container col ">
     <div class="bannerWrapper">
       <img class="banner" src="./banner.png" alt="" />
-      <!-- <div class="avertwraper row a-c " @click="personalCenter">
-        <img class="avert" :src="userinfo.headimgurl" alt="">
+      <div class="avertwraper row a-c ">
+        <img class="avert" :src="userinfo.imgurl" alt="">
         <div class="name col">
-          <div class="row a-c" >
-            <div>{{userinfo.nickname}}</div>
+          <div class="row a-c">
+            <div>{{userinfo.orgname}}</div>
             <img class="sincerity" src="./sincerity.png" alt="" />
           </div>
-          <div class="integral">当前积分  120 </div>
+          <div class="integral">当前积分 {{capi.integral}}</div>
         </div>
       </div>
       <div class="shadow"></div>
-      <div class="center  row a-c j-c" @click="personalCenter">赋予爱商家入口</div> -->
+      <div class="center  row a-c j-c" @click="integral">获得积分</div>
     </div>
-    <div class="itemWrapper row j-b f-w ">
-      <div class="item col j-c a-c " @click="alliancePolicy()">
+    <div class="itemWrapper row f-w j-b " ref="itemwrapper">
+      <div class="item col j-c a-c border-right" @click="VideoList(18)">
         <img src="./icon1.png" alt="" />
         <div class="text-wrap">
-          <div class="text1">联盟政策</div>
-          <div class="text2">UNION POLICY</div>
+          <div class="text1">专属课程</div>
+          <div class="text2">EXCLUSIVE COURSE</div>
         </div>
       </div>
-      <!-- <div class="item col j-c a-c " @click="add()">
+      <!-- <div class="item col j-c a-c  border-right" @click="VideoList(19)">
+        <img src="./integralcourse.png" alt="" />
+        <div>积分课程</div>
+      </div>
+      <div class="item col j-c a-c " @click="VideoList(20)">
+        <img src="./pay.png" alt="" />
+        <div>付费课程</div>
+      </div> -->
+      <div class="item col j-c a-c" @click="integralRank()">
         <img src="./icon2.png" alt="" />
         <div class="text-wrap">
-          <div class="text1">联盟模式</div>
-          <div class="text2">ALLIANCE MODE</div>
-        </div>
-      </div> -->
-      <div class="item col j-c a-c " @click="toCase()">
-        <img src="./icon3.png" alt="" />
-        <div class="text-wrap">
-          <div class="text1">联盟案例</div>
-          <div class="text2">UNION CASE</div>
+          <div class="text1">诚商积分</div>
+          <div class="text2">HONESTLY INTEGRAL</div>
         </div>
       </div>
-      <div class="btm-wrap">
-        <img class="btmbanner" src="./btmbanner.png" alt="" @click="btmbanner">
-        <img class="finger " src="./finger.png" alt="" @click="btmbanner">
+      <div class="item col j-c a-c  border-right" @click="broadcast()">
+        <img src="./icon3.png" alt="" />
+        <div class="text-wrap">
+          <div class="text1">诚商直播</div>
+          <div class="text2">LIVE HONESTLY</div>
+        </div>
+      </div>
+      <div class="item col j-c a-c " @click="memorial()">
+        <img src="./icon4.png" alt="" />
+        <div class="text-wrap">
+          <div class="text1">专属讣告</div>
+          <div class="text2">EXCLUSIVE OBITUARY</div>
+        </div>
       </div>
     </div>
     <div class="bar"></div>
@@ -49,30 +60,33 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-import { getuserinfo, selfDetail } from 'api/index'
+import { getinfo, selfDetail } from 'api/index'
 export default {
   data() {
     return {
-      userinfo: ''
+      userinfo: '',
+      capi: ''
 
 
     }
   },
   mounted() {
-    // this._selfDetail()
+    this._getinfo()
+    // this.computedHeight()
+    // window.addEventListener('resize', () => {
+    //   this.computedHeight()
+    // })
     window.WeixinJSBridge.call('hideOptionMenu');
 
   },
   methods: {
-    btmbanner() {
-      window.location.href = "http://b.fuyulove.com/extion/invited.aspx?extid=6"
-    },
-    add() {
-      this.$router.push({
-        path: '/add',
-
-      })
-
+    computedHeight() {
+      let awaitTimer = setTimeout(() => {
+        clearTimeout(awaitTimer)
+        console.log('执行')
+        // this.$refs.itemwrapper.style.height = document.documentElement.clientHeight/100 + 'rem'
+        this.$refs.itemwrapper.style.height = window.screen.availHeight + 'rem'
+      }, 10)
     },
     _selfDetail() {
       selfDetail().then(res => {
@@ -88,11 +102,12 @@ export default {
       })
 
     },
-    _getuserinfo() {
-      getuserinfo().then(res => {
-        console.log('用户信息', res)
+    _getinfo() {
+      getinfo().then(res => {
+        console.log('获取商家信息', res)
         if (res.code == 0) {
-          this.userinfo = res.data.userinfo
+          this.userinfo = res.data.info
+          this.capi = res.data.capi
         } else {
           this.$router.push({
             path: '/login',
@@ -101,20 +116,34 @@ export default {
       })
 
     },
-    toCase() {
-      this.$router.push({ path: '/case' })
+    broadcast() {
+      window.location.href = "https://appt2ipqewv9303.h5.xiaoeknow.com/mp_more/eyJpZCI6IjI1MDU3MDgiLCJjaGFubmVsX2lkIjoiIiwiY29tcG9uZW50X2lkIjoiIn0?entry=2&entry_type=2001"
+
     },
-    brand() {
-      this.$router.push({ path: '/brand' })
+    yiJing() {
+      this.$router.push({ path: '/yiJing' })
+    },
+    VideoList(cate) {
+      this.$router.push({
+        path: '/VideoList',
+        query: {
+          cate: cate,
+        }
+
+      })
+    },
+    memorial() {
+      this.$router.push({ path: '/memorial' })
     },
     mechan() {
       this.$router.push({ path: '/mechan' })
     },
-    alliancePolicy() {
-      this.$router.push({ path: '/alliancePolicy' })
+    integralRank() {
+      this.$router.push({ path: '/integralRank' })
     },
-    personalCenter() {
-      this.$router.push({ path: '/personalCenter' })
+
+    integral() {
+      this.$router.push({ path: '/integral' })
     },
 
   },
@@ -124,17 +153,6 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
-@keyframes finger
-  0%
-    transform translate(-5px)
-  25%
-    transform translate(5px)
-  50%
-    transform translate(-5px)
-  75%
-    transform translate(5px)
-  100%
-    transform translate(-5px)
 .container
   position absolute
   top 0px
@@ -176,13 +194,13 @@ export default {
       width 100%
     .center
       position absolute
-      width 270px
+      width 170px
       height 50px
-      background-color #a9365d
       border-radius 25px
+      border 2px solid #c1b199
       right 13px
       bottom 25px
-      color #ffffff
+      color #c1b199
       font-size 30px
   .itemWrapper
     color #ffffff
@@ -203,7 +221,7 @@ export default {
       width 48%
       height 45%
       border-radius 10px
-      background-color #a29076
+      background-color #b2a189
       .text-wrap
         position absolute
         top 20px
@@ -217,19 +235,6 @@ export default {
         position absolute
         bottom 0
         right 0
-    .btm-wrap
-      position relative
-      .btmbanner
-        width 677px
-        height 253px
-        margin-top 15px
-        border-radius 10px
-      .finger
-        position absolute
-        left 304px
-        top 135px
-        width 80px
-        animation finger infinite 2s
   .bar
     width 100%
     height 96px

@@ -37,8 +37,9 @@
     </div>
     <!-- 购买积分 -->
     <van-popup v-model="popShow1" class="popShow col a-c" closeable>
-      <div class="title">学习课程</div>
-      <div class="user">使用{{VideoObj.videoprice}}积分学习该课程</div>
+      <!-- <div class="title">学习课程</div> -->
+      <img class="inter" src="./img/intery.png" alt="">
+      <div class="user">使用<span style="color:#ae9f88">{{VideoObj.videoprice}}积分</span>学习该课程</div>
       <div class="save">当前剩余积分：{{capi.integral}}</div>
       <div class="btn row a-c j-c" @click="_buyvideo">确认</div>
     </van-popup>
@@ -341,6 +342,10 @@ export default {
   width: 511px;
   border-radius: 10px;
 }
+.inter{
+  height: 185px;
+  width: 100%;
+}
 .popShow > .title {
   color: #000000;
   font-size: 40px;
@@ -353,14 +358,14 @@ export default {
   margin-top: 65px;
 }
 .popShow > .user {
-  color: #ae9f88;
+  color: #969696;
   font-size: 40px;
-  margin-top: 65px;
+  margin-top: 35px;
 }
 .popShow > .save {
   color: #000000;
   font-size: 27px;
-  margin-top: 70px;
+  margin-top: 58px;
 }
 .popShow > .tip {
   color: #000000;
@@ -371,7 +376,7 @@ export default {
 }
 .popShow > .btn {
   color: #ffffff;
-  font-size: 40px;
+  font-size: 30px;
   width: 400px;
   height: 74px;
   border-radius: 5px;
