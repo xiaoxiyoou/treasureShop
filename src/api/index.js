@@ -169,3 +169,5 @@ export const Collect = (params) => ajax(URL + 'action/serviceapi/Collect', param
 export const getCollect = (params) => ajax(URL + 'action/serviceapi/getCollect', params)
 // 删除收藏
 export const FCollect = (params) => ajax(URL + 'action/serviceapi/FCollect', params)
+// 自动登录
+export const autologin = (params) => ajax(SHOP_URL + 'api/union/autologin', params)
