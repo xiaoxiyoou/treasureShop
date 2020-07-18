@@ -14,7 +14,8 @@ const routes = [{
   {
     path: '/train',
     name: 'train',
-    component: () => import('pages/train/train'),
+    // component: () => import('pages/train/train'),
+    component: resolve=>(require(['pages/train/train'],resolve)),
     meta: {
       title: '诚商培训',
       requireAuth: true,
@@ -25,7 +26,8 @@ const routes = [{
   {
     path: '/policy',
     name: 'policy',
-    component: () => import('pages/policy/policy'),
+    // component: () => import('pages/policy/policy'),
+    component: resolve=>(require(['pages/policy/policy'],resolve)),
     meta: {
       title: '诚商政策',
       depth: 1
@@ -35,7 +37,8 @@ const routes = [{
   {
     path: '/LoginIn',
     name: 'LoginIn',
-    component: () => import('pages/LoginIn/LoginIn'),
+    // component: () => import('pages/LoginIn/LoginIn'),
+    component: resolve=>(require(['pages/LoginIn/LoginIn'],resolve)),
     meta: {
       title: '登录',
       depth: 1
@@ -46,7 +49,8 @@ const routes = [{
   {
     path: '/apply',
     name: 'apply',
-    component: () => import('pages/apply/apply'),
+    // component: () => import('pages/apply/apply'),
+    component: resolve=>(require(['pages/apply/apply'],resolve)),
     meta: {
       title: '诚商申请',
       depth: 1
@@ -56,7 +60,8 @@ const routes = [{
   {
     path: '/alliancePolicy',
     name: 'alliancePolicy',
-    component: () => import('pages/alliancePolicy/alliancePolicy'),
+    // component: () => import('pages/alliancePolicy/alliancePolicy'),
+    component: resolve=>(require(['pages/alliancePolicy/alliancePolicy'],resolve)),
     meta: {
       title: '家族宝诚信联盟商家政策',
       depth: 1
@@ -67,7 +72,8 @@ const routes = [{
   {
     path: '/add',
     name: 'add',
-    component: () => import('pages/add/add'),
+    // component: () => import('pages/add/add'),
+    component: resolve=>(require(['pages/add/add'],resolve)),
     meta: {
       title: '家族宝诚信联盟商家补充政策',
       depth: 1
@@ -77,7 +83,8 @@ const routes = [{
   {
     path: '/integral',
     name: 'integral',
-    component: () => import('pages/integral/integral'),
+    // component: () => import('pages/integral/integral'),
+    component: resolve=>(require(['pages/integral/integral'],resolve)),
     meta: {
       title: '我的积分',
       requireAuth: true,
@@ -88,7 +95,8 @@ const routes = [{
   {
     path: '/IntegralRecord',
     name: 'IntegralRecord',
-    component: () => import('pages/IntegralRecord/IntegralRecord'),
+    // component: () => import('pages/IntegralRecord/IntegralRecord'),
+    component: resolve=>(require(['pages/IntegralRecord/IntegralRecord'],resolve)),
     meta: {
       title: '积分记录',
       requireAuth: true,
@@ -99,7 +107,8 @@ const routes = [{
   {
     path: '/integralRank',
     name: 'integralRank',
-    component: () => import('pages/integralRank/integralRank'),
+    // component: () => import('pages/integralRank/integralRank'),
+    component: resolve=>(require(['pages/integralRank/integralRank'],resolve)),
     meta: {
       title: '积分排行榜',
       requireAuth: true,
@@ -110,7 +119,8 @@ const routes = [{
   {
     path: '/case',
     name: 'case',
-    component: () => import('pages/case/case'),
+    // component: () => import('pages/case/case'),
+    component: resolve=>(require(['pages/case/case'],resolve)),
     meta: {
       title: '联盟案例',
       depth: 1
@@ -120,7 +130,8 @@ const routes = [{
   {
     path: '/caseDetail',
     name: 'caseDetail',
-    component: () => import('pages/caseDetail/caseDetail'),
+    // component: () => import('pages/caseDetail/caseDetail'),
+    component: resolve=>(require(['pages/caseDetail/caseDetail'],resolve)),
     meta: {
       title: '案例详情',
       depth: 1
@@ -130,7 +141,8 @@ const routes = [{
   {
     path: '/memorial',
     name: 'memorial',
-    component: () => import('pages/memorial/memorial'),
+    // component: () => import('pages/memorial/memorial'),
+    component: resolve=>(require(['pages/memorial/memorial'],resolve)),
     meta: {
       title: '专属讣告',
       requireAuth: true,
@@ -141,7 +153,8 @@ const routes = [{
   {
     path: '/VideoList',
     name: 'VideoList',
-    component: () => import('pages/VideoList/VideoList'),
+    // component: () => import('pages/VideoList/VideoList'),
+    component: resolve=>(require(['pages/VideoList/VideoList'],resolve)),
     meta: {
       title: '视频列表',
       requireAuth: true,
@@ -152,7 +165,8 @@ const routes = [{
   {
     path: '/VideoDetail',
     name: 'VideoDetail',
-    component: () => import('pages/VideoDetail/VideoDetail'),
+    // component: () => import('pages/VideoDetail/VideoDetail'),
+    component: resolve=>(require(['pages/VideoDetail/VideoDetail'],resolve)),
     meta: {
       title: '视频详情',
       requireAuth: true,

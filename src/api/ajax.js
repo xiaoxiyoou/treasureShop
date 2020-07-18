@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from './../store/index'
 import qs from 'qs'
-let token = localStorage.getItem('token')
 
 export default function ajax(url = '', params = {}, type = 'GET') {
   let promise;
@@ -23,10 +22,8 @@ export default function ajax(url = '', params = {}, type = 'GET') {
       // 1.5 发起get请求
       promise = axios.get(url, {
         headers: {
-          // 'uid': uid,
-          // 'usrkey': openid,
-          // 'sid': sid
-          'token': token,
+       
+          'token': localStorage.getItem('token'),
         }
       })
       store.dispatch('setStatus', true)
@@ -35,10 +32,8 @@ export default function ajax(url = '', params = {}, type = 'GET') {
       promise = axios.post(url, qs.stringify(params), {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          // 'uid': uid,
-          // 'usrkey': openid,
-          // 'sid': sid
-          'token': token,
+        
+          'token': localStorage.getItem('token'),
         }
       });
       store.dispatch('setStatus', true)

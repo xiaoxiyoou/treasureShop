@@ -105,9 +105,10 @@ export default {
           // 已经绑定
           var token = res.data.token
           localStorage.setItem('token', token)
-          this.$router.push({
-            path: '/train',
-          })
+            this.$router.push({
+              path: '/train',
+            })
+
         } else {
           // 未绑定
           this.conShow = true
