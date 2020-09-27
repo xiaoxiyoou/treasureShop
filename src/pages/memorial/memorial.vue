@@ -63,10 +63,10 @@ export default {
       })
     },
     pre() {
-      window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=xRJdXN5KgJgmtJCBI97Xig=='
+      window.location.href = 'http://wx.fuyulove.com/obituary/index.aspx?id=4pwQT/ht5gDFQPkphd0CSw=='
     },
     pre2() {
-      window.location.href = 'http://wx.fuyulove.com/Obituary/index?id=8XIG1EMzxiDXykWrCIp_DQ=='
+      window.location.href = 'http://wx.fuyulove.com/obituary/index.aspx?id=Rp4yC29ASUICd8NKFz49QQ=='
     },
     make() {
       // window.location.href = 'http://b.fuyulove.com/3g/login.aspx'

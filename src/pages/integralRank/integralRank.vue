@@ -24,7 +24,7 @@
     </div>
     <div class="content">
       <div class="tab row a-c j-b van-hairline--bottom">
-        <div class="tabItem row a-c " v-for="(item,index) in title" :class="{'active':isActive==index}" :key="index" @click="tab(index,item.type)">{{item.name}}</div>
+        <div class="tabItem row a-c " v-for="(item,index) in title" :class="{'active':isActive==item.type}" :key="index" @click="tab(item.type)">{{item.name}}</div>
       </div>
       <div class="item row a-c j-b " v-for="(item,index) in list" :key="index">
         <div class="left row a-c">
@@ -42,6 +42,8 @@
       </div>
       <noMessage :noinfoShow="noinfoShow" />
     </div>
+    <div class="btmFix row a-c j-c"></div>
+    <div class="btnCord row j-c a-c" @click="getCord">获取积分</div>
   </div>
 
 </template>
@@ -51,12 +53,13 @@ import { IntegralRank } from 'api/index'
 export default {
   data() {
     return {
-      title: [{ name: '总计积分', type: 0 }, { name: '学习积分', type: 1 }, { name: ' 当月积分', type: 3 }, { name: '增长排名', type: 4 }],
-      isActive:this.$route.query.type - 1 || 0,
+      // title: [{ name: '总计积分', type: 0 }, { name: '学习积分', type: 1 }, { name: ' 当月积分', type: 3 }, { name: '增长排名', type: 4 }],
+      title: [{ name: '学习使用排名', type: 1 }, { name: ' 线下学习积分', type: 5 }, { name: '增长率排名', type: 4 }],
+      isActive: this.$route.query.type || 1,
       noinfoShow: false,
       list: [],
       self: "",
-      type: this.$route.query.type|| 0 
+      type: this.$route.query.type || 1
 
     }
   },
@@ -78,9 +81,8 @@ export default {
       })
     },
 
-    tab(flag, type) {
-      this.isActive = flag
-      console.log(type)
+    tab( type) {
+      this.isActive = type
       this.type = type
       this._IntegralRank(type)
     },
@@ -89,6 +91,13 @@ export default {
         path: '/IntegralRecord',
 
       })
+    },
+    getCord() {
+        this.$router.push({
+        path: '/integral',
+
+      })
+
     }
 
   },
@@ -168,8 +177,7 @@ export default {
         margin-top 10px
 .content
   width 691px
-  // box-shadow 1px 1px 5px #eaeaea
-  // border-radius 20px
+  padding-bottom 200px
   background-color #ffffff
   margin-top 22px
   border 2px solid #000000
@@ -218,4 +226,25 @@ export default {
         width 280px
     .btn
       color #000000
+.btmFix
+  position fixed
+  bottom 0
+  width 100%
+  background-color #7c7161
+  opacity 0.6
+  height 136px
+  z-index 1000
+.btnCord
+  position fixed
+  bottom 18px
+  width 600px
+  height 91px
+  border-radius 10px
+  background-color #ffffff
+  color #7c7161
+  font-size 36px
+  font-weight 700
+  left 50%
+  transform translateX(-50%)
+  z-index 1001
 </style>

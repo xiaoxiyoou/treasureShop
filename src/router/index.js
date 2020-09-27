@@ -156,7 +156,7 @@ const routes = [{
     // component: () => import('pages/VideoList/VideoList'),
     component: resolve=>(require(['pages/VideoList/VideoList'],resolve)),
     meta: {
-      title: '视频列表',
+      title: '专属课程',
       requireAuth: true,
       depth: 1
     },
@@ -169,6 +169,28 @@ const routes = [{
     component: resolve=>(require(['pages/VideoDetail/VideoDetail'],resolve)),
     meta: {
       title: '视频详情',
+      requireAuth: true,
+      depth: 1
+    },
+
+  },
+  {
+    path: '/getIntegral',
+    name: 'getIntegral',
+    component: resolve=>(require(['pages/getIntegral/getIntegral'],resolve)),
+    meta: {
+      title: '索要积分',
+      requireAuth: true,
+      depth: 1
+    },
+
+  },
+  {
+    path: '/giveIntegral',
+    name: 'giveIntegral',
+    component: resolve=>(require(['pages/giveIntegral/giveIntegral'],resolve)),
+    meta: {
+      title: '索要积分',
       requireAuth: true,
       depth: 1
     },

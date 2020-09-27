@@ -105,9 +105,15 @@ export default {
           // 已经绑定
           var token = res.data.token
           localStorage.setItem('token', token)
+          if (localStorage.getItem('fromUrl')) {
+            this.$router.push({
+              path: localStorage.getItem('fromUrl'),
+            })
+          } else {
             this.$router.push({
               path: '/train',
             })
+          }
 
         } else {
           // 未绑定
@@ -140,9 +146,15 @@ export default {
             if (res.data.code == 0) {
               var token = res.data.data.token
               localStorage.setItem('token', token)
-              this.$router.push({
-                path: '/train',
-              })
+              if (localStorage.getItem('fromUrl')) {
+                this.$router.push({
+                  path: localStorage.getItem('fromUrl'),
+                })
+              } else {
+                this.$router.push({
+                  path: '/train',
+                })
+              }
             } else {
               Toast(res.data.msg)
             }

@@ -6,7 +6,7 @@ s<template>
         <img class="avert" :src="userinfo.imgurl" alt="">
         <div class="name col">
           <div class="row a-c">
-            <div>{{userinfo.orgname}}</div>
+            <div class="orgname">{{userinfo.orgname}}</div>
             <img class="sincerity" src="./sincerity.png" alt="" />
           </div>
           <div class="integral">当前积分 {{capi.integral}}</div>
@@ -108,6 +108,8 @@ export default {
         if (res.code == 0) {
           this.userinfo = res.data.info
           this.capi = res.data.capi
+          let shopId = this.userinfo.id
+          localStorage.setItem("shopId",shopId)
         } else {
           this.$router.push({
             path: '/login',
@@ -180,6 +182,13 @@ export default {
       .name
         font-size 35px
         margin-top 45px
+        .row
+          .orgname
+            overflow hidden
+            display -webkit-box
+            -webkit-box-orient vertical
+            -webkit-line-clamp 1
+            text-overflow ellipsis
         img
           width 38px
           margin-left 10px
@@ -202,6 +211,7 @@ export default {
       bottom 25px
       color #c1b199
       font-size 30px
+      z-index 100
   .itemWrapper
     color #ffffff
     padding 30px 35px

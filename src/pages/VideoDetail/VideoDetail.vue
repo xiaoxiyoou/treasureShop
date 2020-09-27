@@ -28,12 +28,15 @@
       <div v-if="VideoObj.isfree == 0" class="value border-left-1px" @click="view">
         免费观看
       </div>
-      <div v-if="VideoObj.isfree == 2 &&VideoObj.isbuy==0" class="value border-left-1px" @click="view">
+      <div v-if="VideoObj.isfree == 2 " class="value border-left-1px" @click="view">
+        {{VideoObj.videoprice}}积分
+      </div>
+      <!-- <div v-if="VideoObj.isfree == 2 &&VideoObj.isbuy==0" class="value border-left-1px" @click="view">
         {{VideoObj.videoprice}}积分
       </div>
       <div v-if="VideoObj.isfree == 2 &&VideoObj.isbuy==1" class="value border-left-1px" @click="view">
         已购买
-      </div>
+      </div> -->
     </div>
     <!-- 购买积分 -->
     <van-popup v-model="popShow1" class="popShow col a-c" closeable>
@@ -92,7 +95,6 @@ export default {
     document.body.scrollTop = document.documentElement.scrollTop = 0
     window.WeixinJSBridge.call('hideOptionMenu');
 
-
   },
   beforeDestroy() {
     console.log('执行')
@@ -143,7 +145,8 @@ export default {
         if (res.code == 0) {
           Toast('购买成功')
           this.popShow1 = false
-          this._getVideoDetail()
+          this.VideoObj.isbuy = 1  //手动更改购买状态
+          // this._getVideoDetail()
         } else if (res.code == 1) {
           this.popShow2 = true
           this.popShow1 = false
@@ -171,6 +174,8 @@ export default {
             this.VideoEnded()
             this.VideoPause()
           })
+          this.VideoObj.isbuy = 0  //默认所有为未购买状态
+
         }
       })
     },
@@ -194,7 +199,7 @@ export default {
     VideoStart() {
       this.$refs.video.addEventListener('play', () => {
         if (this.looktime) {
-            this.$refs.video.currentTime = this.looktime
+          this.$refs.video.currentTime = this.looktime
         }
         this.looktime = 0
         this.duration = this.$refs.video.duration
@@ -342,7 +347,7 @@ export default {
   width: 511px;
   border-radius: 10px;
 }
-.inter{
+.inter {
   height: 185px;
   width: 100%;
 }

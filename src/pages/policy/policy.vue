@@ -23,24 +23,31 @@
           <div class="text2">UNION POLICY</div>
         </div>
       </div>
-      <!-- <div class="item col j-c a-c " @click="add()">
-        <img src="./icon2.png" alt="" />
-        <div class="text-wrap">
-          <div class="text1">联盟模式</div>
-          <div class="text2">ALLIANCE MODE</div>
-        </div>
-      </div> -->
-      <div class="item col j-c a-c " @click="toCase()">
+      <div class="item col j-c a-c " @click="toCase(1)">
         <img src="./icon3.png" alt="" />
         <div class="text-wrap">
           <div class="text1">联盟案例</div>
           <div class="text2">UNION CASE</div>
         </div>
       </div>
-      <div class="btm-wrap">
-        <img class="btmbanner" src="./btmbanner.png" alt="" @click="btmbanner">
-        <img class="finger " src="./finger.png" alt="" @click="btmbanner">
+      <div class="item col j-c a-c " @click="toCase(2)">
+        <img src="./icon4.png" alt="" />
+        <div class="text-wrap">
+          <div class="text1">团体标准</div>
+          <div class="text2">GROUP STANDARD</div>
+        </div>
       </div>
+      <div class="item col j-c a-c " @click="btmbanner()">
+        <img src="./icon5.png" alt="" />
+        <div class="text-wrap">
+          <div class="text1">殡业获客神器</div>
+          <div class="text3">加入赋予爱</div>
+        </div>
+        <img class="finger " src="./finger.png" alt="">
+      </div>
+      <!-- <div class="btm-wrap">
+        <img class="btmbanner" src="./btmbanner.png" alt="" @click="btmbanner">
+      </div> -->
     </div>
     <div class="bar"></div>
     <div class="btm  col j-c a-c">
@@ -101,8 +108,13 @@ export default {
       })
 
     },
-    toCase() {
-      this.$router.push({ path: '/case' })
+    toCase(catid) {
+      this.$router.push({
+        path: '/case',
+        query: {
+          catid: catid,
+        }
+      })
     },
     brand() {
       this.$router.push({ path: '/brand' })
@@ -204,6 +216,12 @@ export default {
       height 45%
       border-radius 10px
       background-color #a29076
+      .finger
+        position absolute
+        left 144px
+        top 65px
+        width 80px
+        animation finger infinite 2s
       .text-wrap
         position absolute
         top 20px
@@ -212,6 +230,8 @@ export default {
           font-size 30px
         .text2
           font-size 13px
+        .text3
+          font-size 24px
       img
         width 115px
         position absolute
@@ -224,12 +244,6 @@ export default {
         height 253px
         margin-top 15px
         border-radius 10px
-      .finger
-        position absolute
-        left 304px
-        top 135px
-        width 80px
-        animation finger infinite 2s
   .bar
     width 100%
     height 96px

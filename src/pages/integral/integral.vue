@@ -48,14 +48,36 @@
         <div class="left col j-a" style="height:100%">
           <div class="row a-c">
             <img class="icon" src="./icon.png" alt="">
-            <div class="title">获得300积分</div>
+            <div class="title">学习得积分</div>
           </div>
-          <div class="des">当月增长率前十名</div>
-          <div class="tip" style="white-space:nowrap">当月增长率前十名奖励300积分</div>
+          <div class="des">线下学习获得积分</div>
+          <div class="tip">公司报名学习1元积1分（如：300元会务费即得300元积分)每多加一位员工+10积分</div>
+        </div>
+      </div>
+      <div class="item row a-c j-b van-hairline--bottom">
+        <div class="left col j-a" style="height:100%">
+          <div class="row a-c">
+            <img class="icon" src="./icon.png" alt="">
+            <div class="title">排名得积分</div>
+          </div>
+          <div class="des">当月增长率前十名奖励300积分</div>
+          <div class="tip" style="white-space:nowrap">增长率计算方法为</div>
+          <div class="tip">（当月进货额—前三个月进货额平均值/前三个月进货平均值）</div>
         </div>
         <div class="btn row a-c j-c" @click="integralRank">查看排名</div>
       </div>
-
+      <div class="item row a-c j-b van-hairline--bottom">
+        <div class="left col j-a" style="height:100%">
+          <div class="row a-c">
+            <img class="icon" src="./icon.png" alt="">
+            <div class="title">与好友索要获得积分</div>
+          </div>
+          <div class="des">分享给好友索要积分</div>
+          <div class="tip">每次索要积分为100积分，不限次数。</div>
+          <div class="tip">好友同意赠予积分后，即获得积分。</div>
+        </div>
+        <div class="btn row a-c j-c" @click="getIntegral">索要积分</div>
+      </div>
     </div>
     <!-- <van-popup v-model="show" class="pop " round>
       <div class="wrapper col a-c">
@@ -91,6 +113,12 @@ export default {
 
   },
   methods: {
+    getIntegral() {
+      this.$router.push({
+        path: '/getIntegral',
+
+      })
+    },
     integralRank() {
       this.$router.push({
         path: '/integralRank',
@@ -151,7 +179,6 @@ export default {
 </script>
 <style scoped lang="stylus">
 .container
-  position absolute
   top 0px
   width 100%
   height 100%
@@ -162,14 +189,16 @@ export default {
     position absolute
   .top
     width 100%
-    height 390px
+    height 278px
     z-index 1
     color #000000
     top 0
     .intergralCon
       font-size 35px
+      margin-top 40px
       .intergral
         font-size 72px
+        font-weight 700
     .btn
       width 146px
       height 46px
@@ -182,19 +211,19 @@ export default {
     width 690px
     // box-shadow 1px 1px 5px #eaeaea
     // border-radius 20px
-    // margin-top -70px
+    margin-bottom 70px
     background-color #ffffff
     .item
       border 2px solid #000000
-      padding 0 62px 0 33px
-      height 202px
+      padding 10px 40px
+      height 226px
       margin-top 20px
       img
         width 30px
         height 32px
         margin-right 5px
       .left
-        width 400px
+        // width 400px
         .row
           .title
             color #000000
@@ -202,17 +231,21 @@ export default {
         .des
           font-size 27px
           color #000000
+          margin-top 10px
         .tip
           font-size 25px
           color #d5d5d5
+          margin-top 10px
       .btn
         width 133px
         height 55px
         border-radius 5px
         background-color #b9a484
         color #ffffff
-        // margin-bottom 40px
-        font-size 25px
+        font-size 27px
+        position absolute
+        right 50px
+        top 50px
   .pop
     .wrapper
       width 475px

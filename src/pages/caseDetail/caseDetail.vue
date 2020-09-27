@@ -1,10 +1,9 @@
 <template>
   <div class="container">
     <div class="title">{{info.title}}</div>
-    <div class="title">家族宝精选案例</div>
-    <!-- <div class="des">{{info.subtitle}}</div> -->
+    <div class="title2">{{info.subtitle}}</div>
+    <div class="content"  v-html="info.contents"></div>
     <div class="des">被查看{{info.look}}次</div>
-    <div class="content" v-html="info.contents"></div>
   </div>
 
 </template>
@@ -52,13 +51,18 @@ export default {
   .title
     font-size 35px
     color #252525
-  .des
+  .title2
+    font-size 30px
+    color #8a898a
     margin-top 10px
-    padding-bottom 20px
+    padding-bottom 15px
+  .des
+    margin-top 5px
+    padding-bottom 120px
     font-size 27px
     color #8a898a
   .content
-    margin-bottom 100px
+    margin-bottom 50px
     >>>img
       max-width 100%
 </style>

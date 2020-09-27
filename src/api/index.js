@@ -171,3 +171,9 @@ export const getCollect = (params) => ajax(URL + 'action/serviceapi/getCollect',
 export const FCollect = (params) => ajax(URL + 'action/serviceapi/FCollect', params)
 // 自动登录
 export const autologin = (params) => ajax(SHOP_URL + 'api/union/autologin', params)
+// 商家端获取积分赠与记录
+export const getGift = (params) => ajax(SHOP_URL + 'api/union/GetGift', params)
+// 商家提交赠与积分接口
+export const postgift = (params) => ajax(SHOP_URL + 'api/union/postgift', params)
+// 获取索要积分用户信息
+export const getinfobyid = (params) => ajax(SHOP_URL + 'api/union/getinfobyid', params)
